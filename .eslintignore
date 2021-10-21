@@ -1,0 +1,9 @@
+deploy/
+logs/
+coverage/
+node_modules/
+docs/
+automated_api_tests/
+.idea/
+.vscode/
+**/*.xxx.js
