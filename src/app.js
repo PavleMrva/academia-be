@@ -1,8 +1,9 @@
 const express = require('express');
 const morgan = require('morgan');
-const logger = require('./libs/logger');
 const config = require('./config');
 const app = express();
+
+const {studentsAPI} = require('./routes');
 
 app
   .use(express.urlencoded({extended: false}))
@@ -17,7 +18,6 @@ if (config.dev) {
 require('./middleware/responses')(app);
 
 app.get('/', (req, res) => {
-  logger.info('Hello World');
   res.send('Hello World');
 });
 
@@ -25,7 +25,7 @@ app.get('/', (req, res) => {
 // app.use('/api/v1/courses', );
 // app.use('/api/v1/lectures', );
 // app.use('/api/v1/subscriptions', );
-// app.use('/api/v1/users', );
+app.use('/api/v1/students', studentsAPI);
 
 // Default error handler
 app.use(require('./middleware/defaultError'));

@@ -1,8 +1,9 @@
 require('dotenv').config();
 
+const sequelize = require('./src/db');
 const config = require('./src/config');
 const app = require('./src/app');
-const logger = require('pino')();
+const logger = require('./src/libs/logger');
 
 let server;
 
@@ -11,10 +12,22 @@ main();
 async function main() {
   try {
     setupProcessListeners();
+    await setupSequelize();
     await setupServer();
   } catch (err) {
     logger.error('Error during bootstrap', err);
     stopGracefully();
+  }
+}
+
+async function setupSequelize() {
+  try {
+    await sequelize.authenticate();
+    logger.info('Connection has been established successfully.');
+    await sequelize.sync({force: true});
+    logger.info('All models were synchronized successfully.');
+  } catch (error) {
+    logger.error(`Unable to connect to the database: ${error}`);
   }
 }
 
@@ -57,4 +70,6 @@ async function stopGracefully(signal) {
 async function stopServices() {
   await server.close();
   logger.warn('HTTP server closed');
+  await sequelize.close();
+  logger.warn('MySQL connection closed');
 }

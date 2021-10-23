@@ -18,6 +18,8 @@ const logger = pino({
   useOnlyCustomLevels: true,
   // the minimum log level to be display
   level: 'http',
+  // pretty print
+  prettyPrint: true,
 });
 
 module.exports = logger;
