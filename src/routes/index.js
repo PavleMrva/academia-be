@@ -1,5 +1,5 @@
-const studentsAPI = require('./students');
+const usersAPI = require('./users');
 
 module.exports = {
-  studentsAPI,
+  usersAPI,
 };

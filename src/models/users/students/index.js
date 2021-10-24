@@ -1,7 +1,7 @@
 const {DataTypes} = require('sequelize');
-const db = require('../../db');
+const db = require('../../../db');
 
-const Student = db.define('Student', {
+const Student = db.define('student', {
   city: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -19,6 +19,7 @@ const Student = db.define('Student', {
     allowNull: false,
   },
 }, {
+  underscored: true,
   // Other model options go here
 });
 

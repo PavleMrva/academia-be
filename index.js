@@ -24,8 +24,8 @@ async function setupSequelize() {
   try {
     await sequelize.authenticate();
     logger.info('Connection has been established successfully.');
-    await sequelize.sync({force: true});
-    logger.info('All models were synchronized successfully.');
+    // await sequelize.sync({force: true});
+    // logger.info('All models were synchronized successfully.');
   } catch (error) {
     logger.error(`Unable to connect to the database: ${error}`);
   }

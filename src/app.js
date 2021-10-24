@@ -3,7 +3,7 @@ const morgan = require('morgan');
 const config = require('./config');
 const app = express();
 
-const {studentsAPI} = require('./routes');
+const {usersAPI} = require('./routes');
 
 app
   .use(express.urlencoded({extended: false}))
@@ -25,7 +25,7 @@ app.get('/', (req, res) => {
 // app.use('/api/v1/courses', );
 // app.use('/api/v1/lectures', );
 // app.use('/api/v1/subscriptions', );
-app.use('/api/v1/students', studentsAPI);
+app.use('/api/v1/users', usersAPI);
 
 // Default error handler
 app.use(require('./middleware/defaultError'));
