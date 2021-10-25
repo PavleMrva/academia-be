@@ -12,6 +12,12 @@ module.exports = {
   nodePort: 3050,
   apiKey: process.env.API_KEY,
 
+  jwt: {
+    secretKey: process.env.JWT_SECRET_KEY,
+    accessTokenInvalidationTime: process.env.JWT_ACCESS_TOKEN_INVALIDATION_TIME || '30m',
+    refreshTokenInvalidationTime: process.env.JWT_REFRESH_TOKEN_INVALIDATION_TIME || '8h',
+  },
+
   s3: {
     accessKeyId: process.env.S3_ACCESS_KEY,
     secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,

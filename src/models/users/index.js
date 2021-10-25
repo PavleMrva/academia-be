@@ -1,5 +1,6 @@
 const {DataTypes} = require('sequelize');
 const argon2 = require('argon2');
+const errors = require('./errors');
 const config = require('../../config');
 const db = require('../../db');
 const Student = require('./students');
@@ -78,6 +79,8 @@ User.hasOne(Admin, {
 Student.belongsTo(User, {as: 'user'});
 Teacher.belongsTo(User, {as: 'user'});
 Admin.belongsTo(User, {as: 'user'});
+
+User.Errors = errors;
 
 User.prototype.checkPassword = async function(password) {
   try {

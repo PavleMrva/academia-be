@@ -3,6 +3,9 @@ const morgan = require('morgan');
 const config = require('./config');
 const app = express();
 
+// Catch errors thrown in async functions
+require('express-async-errors');
+
 const {usersAPI} = require('./routes');
 
 app
@@ -16,6 +19,8 @@ if (config.dev) {
 }
 
 require('./middleware/responses')(app);
+
+app.use('/api', require('./middleware/jwtCheck'));
 
 app.get('/', (req, res) => {
   res.send('Hello World');

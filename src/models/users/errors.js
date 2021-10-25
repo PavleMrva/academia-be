@@ -1,5 +1,5 @@
 class AuthError extends Error {
-  constructor(statusCode, name, message, data=null) {
+  constructor(statusCode, name, message, data = null) {
     super();
     this.statusCode = statusCode;
     this.name = name;
@@ -15,6 +15,28 @@ class PasswordValidationError extends AuthError {
   }
 }
 
+class UserWithUsernameNotFound extends AuthError {
+  constructor(username) {
+    super(404, 'user_not_found', `User with username ${username} not found`);
+  }
+}
+
+class UserTypeWithUsernameNotFound extends AuthError {
+  constructor(type, username) {
+    super(404, 'user_not_found', `User of type ${type} with username ${username} not found`);
+  }
+}
+
+class UserPasswordIncorrect extends AuthError {
+  constructor(type, username) {
+    super(404, 'user_password_incorrect', 'User password is incorrect');
+  }
+}
+
 module.exports = {
+  AuthError,
   PasswordValidationError,
+  UserWithUsernameNotFound,
+  UserTypeWithUsernameNotFound,
+  UserPasswordIncorrect,
 };

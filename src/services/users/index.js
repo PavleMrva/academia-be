@@ -11,23 +11,32 @@ const getAllUsers = () => {
 };
 
 const authenticate = async (username, password, type) => {
-  const user = await UsersModel.findOne({where: {username}});
+  const user = await UsersModel.findOne({
+    where: {username},
+    attributes: ['id', 'username', 'email', ['first_name', 'firstName'], ['last_name', 'lastName'], 'password'],
+  });
 
   if (!user) {
-    throw new Error(`User with username ${username} not found`);
+    throw new UsersModel.Errors.UserWithUsernameNotFound(username);
   }
 
   const userExists = await user.userByTypeExists(type);
   if (!userExists) {
-    throw new Error(`User of type ${type} with username ${username} not found`);
+    throw new UsersModel.Errors.UserTypeWithUsernameNotFound(type, username);
   }
 
   const isPasswordCorrect = await user.checkPassword(password);
   if (!isPasswordCorrect) {
-    throw new Error('User password is incorrect');
+    throw new UsersModel.Errors.UserPasswordIncorrect();
   }
 
-  return user;
+  return {
+    userId: user.id,
+    username: user.username,
+    email: user.email,
+    firstName: user.firstName,
+    lastName: user.lastName,
+  };
 };
 
 const register = async () => {};

@@ -5,6 +5,8 @@ router.get('/', usersController.getAllUsers);
 
 router.post('/:type(student|teacher|admin)/login', usersController.login);
 
+router.post('/logout', usersController.logout);
+
 router.post('/register', usersController.register);
 
 module.exports = router;
