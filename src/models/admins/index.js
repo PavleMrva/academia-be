@@ -1,4 +1,4 @@
-const db = require('../../../db');
+const db = require('../../db');
 
 const Admin = db.define('Admin', {
 

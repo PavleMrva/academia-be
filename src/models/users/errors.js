@@ -29,19 +29,31 @@ class UserTypeWithUsernameNotFound extends AuthError {
 
 class UserPasswordIncorrect extends AuthError {
   constructor() {
-    super(404, 'user_password_incorrect', 'User password is incorrect');
+    super(400, 'user_password_incorrect', 'User password is incorrect');
   }
 }
 
 class UsernameAlreadyInUse extends AuthError {
   constructor(username) {
-    super(404, 'username_in_use', `Username ${username} already in use`);
+    super(400, 'username_in_use', `Username ${username} already in use`);
+  }
+}
+
+class UsernameCannotBeEmpty extends AuthError {
+  constructor(username) {
+    super(400, 'username_empty', 'Username cannot be empty');
   }
 }
 
 class EmailInUse extends AuthError {
   constructor(email) {
-    super(404, 'username_in_use', `Email ${email} already in use`);
+    super(400, 'username_in_use', `Email ${email} already in use`);
+  }
+}
+
+class EmailCannotBeEmpty extends AuthError {
+  constructor(username) {
+    super(400, 'email_empty', 'Email cannot be empty');
   }
 }
 
@@ -52,5 +64,7 @@ module.exports = {
   UserTypeWithUsernameNotFound,
   UserPasswordIncorrect,
   UsernameAlreadyInUse,
+  UsernameCannotBeEmpty,
   EmailInUse,
+  EmailCannotBeEmpty,
 };

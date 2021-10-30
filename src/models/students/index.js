@@ -1,5 +1,5 @@
 const {DataTypes} = require('sequelize');
-const db = require('../../../db');
+const db = require('../../db');
 
 const ZIP_CODE_REGEX = new RegExp(/^\d{5}[-\s]?(?:\d{4})?$/gm);
 

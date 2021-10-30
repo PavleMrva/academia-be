@@ -2,12 +2,8 @@ const usersService = require('../../services/users');
 const authService = require('../../services/auth');
 
 const getAllUsers = async (req, res) => {
-  try {
-    const users = await usersService.getAllUsers();
-    return res.success(users);
-  } catch (error) {
-    return res.badRequest('Invalid parameters');
-  }
+  const users = await usersService.getAllUsers();
+  return res.success(users);
 };
 
 const login = async (req, res, next) => {
@@ -16,10 +12,6 @@ const login = async (req, res, next) => {
     password,
   } = req.body;
   const {type} = req.params;
-
-  if (!username || !password) {
-    return res.missingParams(req.body);
-  }
 
   const user = await usersService.authenticate(username, password, type);
   const {

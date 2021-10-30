@@ -1,13 +1,12 @@
-const {
-  UsersModel,
-  StudentsModel,
-} = require('../../models/users');
+const UsersModel = require('../../models/users');
+const StudentsModel = require('../../models/students');
 
 const getAllUsers = () => {
   return UsersModel.findAll({
     include: [{
       model: StudentsModel,
     }],
+    attributes: ['id', 'username', 'email', ['first_name', 'firstName'], ['last_name', 'lastName'], 'gender', 'phone'],
   });
 };
 

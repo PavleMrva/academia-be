@@ -1,9 +1,12 @@
-const {UsersModel} = require('../models/users');
+const UsersModel = require('../models/users');
 
 const loginSchema = {
   username: {
     custom: {
       options: (value) => {
+        if (!value) {
+          throw new UsersModel.Errors.UsernameCannotBeEmpty(value);
+        }
         return UsersModel.findOne({
           where: {username: value},
         }).then((user) => {
@@ -27,6 +30,9 @@ const registrationSchema = {
   username: {
     custom: {
       options: (value) => {
+        if (!value) {
+          throw new UsersModel.Errors.UsernameCannotBeEmpty(value);
+        }
         return UsersModel.findOne({
           where: {username: value},
         }).then((user) => {
@@ -40,6 +46,9 @@ const registrationSchema = {
   email: {
     custom: {
       options: (value) => {
+        if (!value) {
+          throw new UsersModel.Errors.EmailCannotBeEmpty(value);
+        }
         return UsersModel.findOne({
           where: {email: value},
         }).then((user) => {

@@ -3,9 +3,9 @@ const argon2 = require('argon2');
 const errors = require('./errors');
 const config = require('../../config');
 const db = require('../../db');
-const Student = require('./students');
-const Teacher = require('./teachers');
-const Admin = require('./admins');
+const Student = require('../students');
+const Teacher = require('../teachers');
+const Admin = require('../admins');
 
 const USER_TYPES = {
   STUDENT: 'student',
@@ -131,8 +131,7 @@ User.Errors = errors;
 
 User.prototype.checkPassword = async function(password) {
   try {
-    await argon2.verify(this.password, password);
-    return true;
+    return await argon2.verify(this.password, password);
   } catch (err) {
     // invalid password hash probably
     return false;
@@ -174,19 +173,21 @@ User.register = async (userData, type) => {
     }
   });
 
-  return await User.findOne({
-    where: {username: userData.username},
-    include: [{
-      model: Student,
-      attributes: ['id', 'city', 'address', 'zipCode'],
-    }],
-    attributes: ['id', 'username', 'email', ['first_name', 'firstName'], ['last_name', 'lastName'], 'gender', 'phone'],
-  });
+  if (type === USER_TYPES.STUDENT) {
+    return await User.findOne({
+      where: {username: userData.username},
+      include: [{
+        model: Student,
+        attributes: ['id', 'city', 'address', 'zipCode'],
+      }],
+      attributes: ['id', 'username', 'email', ['first_name', 'firstName'], ['last_name', 'lastName'], 'gender', 'phone'],
+    });
+  } else {
+    return await User.findOne({
+      where: {username: userData.username},
+      attributes: ['id', 'username', 'email', ['first_name', 'firstName'], ['last_name', 'lastName'], 'gender', 'phone'],
+    });
+  }
 };
 
-module.exports = {
-  UsersModel: User,
-  StudentsModel: Student,
-  TeachersModel: Teacher,
-  AdminsModel: Admin,
-};
+module.exports = User;

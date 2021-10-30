@@ -10,7 +10,7 @@ const generateJWT = (payload, type) => {
   const expiresIn = type === 'access' ? config.jwt.accessTokenInvalidationTime : config.jwt.refreshTokenInvalidationTime;
   logger.info(`[generateJWT] jwtSecretKey: ${config.jwt.secretKey}`);
   logger.info(`[generateJWT] expiresIn: ${expiresIn}`);
-  logger.info(`[generateJWT] payload: ${payload}`);
+  logger.info({info: '[generateJWT] payload: ', payload});
   return jwt.sign({user: payload}, config.jwt.secretKey, {expiresIn});
 };
 

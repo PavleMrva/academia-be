@@ -20,7 +20,11 @@ if (config.dev) {
 
 require('./middleware/responses')(app);
 
-// app.use('/api', require('./middleware/jwtCheck'));
+if (config.dev) {
+  app.use(require('./middleware/apiKeyCheck'));
+} else {
+  app.use('/api', require('./middleware/jwtCheck'));
+}
 
 // app.use('/api/v1/assignments', );
 // app.use('/api/v1/courses', );
