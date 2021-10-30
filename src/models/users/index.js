@@ -13,12 +13,25 @@ const USER_TYPES = {
   ADMIN: 'admin',
 };
 
+const PASSWORD_REGEX = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[#$^+=!*()@%&]).{8,50}$');
+
+const PHONE_REGEX = new RegExp(
+  '^\\+(9[976]\\d|8[987530]\\d|6[987]\\d|5[90]\\d|42\\d|3[875]\\d|2[98654321]\\d|' +
+  '9[8543210]|8[6421]|6[6543210]|5[87654321]|4[987654310]|3[9643210]|2[70]|7|1)\\d{1,14}$',
+);
+
 const User = db.define('user', {
   // Model attributes are defined here
   username: {
     type: DataTypes.STRING,
     unique: true,
     allowNull: false,
+    validate: {
+      len: {
+        args: [5, 50],
+        msg: 'Must be a string between 5 and 50 characters of length',
+      },
+    },
   },
   email: {
     type: DataTypes.STRING,
@@ -29,19 +42,53 @@ const User = db.define('user', {
   password: {
     type: DataTypes.STRING,
     allowNull: false,
+    validate: {
+      is: {
+        args: PASSWORD_REGEX,
+        msg: 'Password must be word between 8 and 50 characters which is composed of at least one number, one symbol and one uppercase letter.',
+      },
+    },
   },
   firstName: {
     type: DataTypes.STRING,
     allowNull: false,
+    validate: {
+      isAlpha: {
+        args: true,
+        msg: 'First name has to contain only letters',
+      },
+    },
   },
   lastName: {
     type: DataTypes.STRING,
     allowNull: false,
     // allowNull defaults to true
+    validate: {
+      isAlpha: {
+        args: true,
+        msg: 'Last name has to contain only letters',
+      },
+    },
   },
   phone: {
     type: DataTypes.STRING,
     allowNull: false,
+    validate: {
+      is: {
+        args: PHONE_REGEX,
+        msg: 'Phone number not valid',
+      },
+    },
+  },
+  gender: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    validate: {
+      isIn: {
+        args: [['M', 'F', 'NB']],
+        msg: 'Gender can only be: M (Male), F (Female), NB (Non-binary)',
+      },
+    },
   },
 }, {
   // Other model options go here
@@ -84,7 +131,8 @@ User.Errors = errors;
 
 User.prototype.checkPassword = async function(password) {
   try {
-    return await argon2.verify(this.password, password);
+    await argon2.verify(this.password, password);
+    return true;
   } catch (err) {
     // invalid password hash probably
     return false;
@@ -104,15 +152,37 @@ User.prototype.userByTypeExists = async function(type) {
   return !!user;
 };
 
-// User.prototype.validatePassword = function(password) {
-//   // Word between 8 and 50 characters which is composed of at least one number, symbol and uppercase (e.g. Password1!, N33du2g0!, dasda!!2DD etc.);
-//   const passwordValidationRegex = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[#$^+=!*()@%&]).{8,50}$');
-//
-//   // validate new password
-//   if (!passwordValidationRegex.test(password)) {
-//     throw new errors.PasswordValidationError();
-//   }
-// };
+User.register = async (userData, type) => {
+  await db.transaction(async (t) => {
+    const user = await User.create(userData, {
+      transaction: t,
+    });
+    userData.userId = user.id;
+
+    if (type === USER_TYPES.STUDENT) {
+      await Student.create(userData, {
+        transaction: t,
+      });
+    } else if (type === USER_TYPES.TEACHER) {
+      await Teacher.create(userData, {
+        transaction: t,
+      });
+    } else {
+      await Admin.create(userData, {
+        transaction: t,
+      });
+    }
+  });
+
+  return await User.findOne({
+    where: {username: userData.username},
+    include: [{
+      model: Student,
+      attributes: ['id', 'city', 'address', 'zipCode'],
+    }],
+    attributes: ['id', 'username', 'email', ['first_name', 'firstName'], ['last_name', 'lastName'], 'gender', 'phone'],
+  });
+};
 
 module.exports = {
   UsersModel: User,

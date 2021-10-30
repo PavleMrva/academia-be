@@ -28,7 +28,7 @@ const checkTokens = async (accessToken, refreshToken) => {
     await Promise.map([accessToken, refreshToken], (token) => verifyJWT(token));
     return {accessToken, refreshToken};
   } catch (err) {
-    // check if the refresh token expired (this could happen if user was inactive for 30 min)
+    // check if the refresh token expired (this could happen if user was inactive for 1 hour)
     await verifyJWT(refreshToken);
     logger.info('[checkTokens] refresh token is valid');
     logger.info('[checkTokens] generating new tokens');

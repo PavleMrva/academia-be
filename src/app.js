@@ -20,17 +20,16 @@ if (config.dev) {
 
 require('./middleware/responses')(app);
 
-app.use('/api', require('./middleware/jwtCheck'));
-
-app.get('/', (req, res) => {
-  res.send('Hello World');
-});
+// app.use('/api', require('./middleware/jwtCheck'));
 
 // app.use('/api/v1/assignments', );
 // app.use('/api/v1/courses', );
 // app.use('/api/v1/lectures', );
 // app.use('/api/v1/subscriptions', );
 app.use('/api/v1/users', usersAPI);
+app.get('/api/v1/ping', (req, res) => {
+  res.success({pong: true});
+});
 
 // Default error handler
 app.use(require('./middleware/defaultError'));

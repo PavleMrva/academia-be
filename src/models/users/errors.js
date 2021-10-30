@@ -17,7 +17,7 @@ class PasswordValidationError extends AuthError {
 
 class UserWithUsernameNotFound extends AuthError {
   constructor(username) {
-    super(404, 'user_not_found', `User with username ${username} not found`);
+    super(404, 'user_not_found', `User with username "${username}" not found`);
   }
 }
 
@@ -28,8 +28,20 @@ class UserTypeWithUsernameNotFound extends AuthError {
 }
 
 class UserPasswordIncorrect extends AuthError {
-  constructor(type, username) {
+  constructor() {
     super(404, 'user_password_incorrect', 'User password is incorrect');
+  }
+}
+
+class UsernameAlreadyInUse extends AuthError {
+  constructor(username) {
+    super(404, 'username_in_use', `Username ${username} already in use`);
+  }
+}
+
+class EmailInUse extends AuthError {
+  constructor(email) {
+    super(404, 'username_in_use', `Email ${email} already in use`);
   }
 }
 
@@ -39,4 +51,6 @@ module.exports = {
   UserWithUsernameNotFound,
   UserTypeWithUsernameNotFound,
   UserPasswordIncorrect,
+  UsernameAlreadyInUse,
+  EmailInUse,
 };

@@ -33,6 +33,17 @@ const badRequest = function(message = 'Bad request', data) {
   });
 };
 
+const unauthorized = function(data) {
+  this.status(401).json({
+    info: {
+      success: false,
+      resultCode: 'unauthorized',
+      message: 'Unauthorized',
+    },
+    data,
+  });
+};
+
 const forbidden = function(data) {
   this.status(403).json({
     info: {
@@ -80,6 +91,7 @@ const responses = {
   success,
   error,
   badRequest,
+  unauthorized,
   forbidden,
   unavailable,
   missingParams,

@@ -1,11 +1,12 @@
 const {
   UsersModel,
+  StudentsModel,
 } = require('../../models/users');
 
 const getAllUsers = () => {
   return UsersModel.findAll({
     include: [{
-      model: UsersModel,
+      model: StudentsModel,
     }],
   });
 };
@@ -15,10 +16,6 @@ const authenticate = async (username, password, type) => {
     where: {username},
     attributes: ['id', 'username', 'email', ['first_name', 'firstName'], ['last_name', 'lastName'], 'password'],
   });
-
-  if (!user) {
-    throw new UsersModel.Errors.UserWithUsernameNotFound(username);
-  }
 
   const userExists = await user.userByTypeExists(type);
   if (!userExists) {
@@ -39,7 +36,9 @@ const authenticate = async (username, password, type) => {
   };
 };
 
-const register = async () => {};
+const register = async (userData, type) => {
+  return await UsersModel.register(userData, type);
+};
 
 module.exports = {
   getAllUsers,
