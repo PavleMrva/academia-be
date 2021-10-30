@@ -18,6 +18,16 @@ module.exports = {
     refreshTokenInvalidationTime: process.env.JWT_REFRESH_TOKEN_INVALIDATION_TIME || '8h',
   },
 
+  facebook: {
+    clientID: process.env.FB_CLIENT_ID,
+    clientSecret: process.env.FB_CLIENT_SECRET,
+  },
+
+  google: {
+    clientID: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+  },
+
   s3: {
     accessKeyId: process.env.S3_ACCESS_KEY,
     secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,

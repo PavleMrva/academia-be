@@ -1,5 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
+const passport = require('passport');
 const config = require('./config');
 const app = express();
 
@@ -25,6 +26,9 @@ if (config.dev) {
 } else {
   app.use('/api', require('./middleware/jwtCheck'));
 }
+
+app.use(passport.initialize());
+require('./middleware/passport')();
 
 // app.use('/api/v1/assignments', );
 // app.use('/api/v1/courses', );

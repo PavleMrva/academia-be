@@ -7,13 +7,10 @@ const getAllUsers = async (req, res) => {
 };
 
 const login = async (req, res, next) => {
-  const {
-    username,
-    password,
-  } = req.body;
-  const {type} = req.params;
+  const user = req.user;
+  const {type} = req.body;
+  await usersService.authenticate(user.username, type);
 
-  const user = await usersService.authenticate(username, password, type);
   const {
     accessToken,
     refreshToken,
