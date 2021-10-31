@@ -6,9 +6,9 @@ module.exports = (req, res, next) => {
   const whitelistRoutes = [
     '/api/v1/ping',
     // TODO: change routes below
-    '/api/v1/users/student/login',
-    '/api/v1/users/teacher/login',
-    '/api/v1/users/admin/login',
+    '/api/v1/users/login',
+    '/api/v1/users/auth/facebook',
+    '/api/v1/users/auth/google',
     '/api/v1/users/student/register',
     '/api/v1/users/teacher/register',
     '/api/v1/users/admin/register',
