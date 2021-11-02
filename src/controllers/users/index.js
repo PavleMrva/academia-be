@@ -35,9 +35,8 @@ const logout = async (req, res, next) => {
 };
 
 const register = async (req, res) => {
-  const {type} = req.params;
   const userData = req.body;
-  const user = await usersService.register(userData, type);
+  const user = await usersService.register(userData);
   return res.success(user);
 };
 

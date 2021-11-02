@@ -1,7 +1,7 @@
 require('dotenv').config();
 global.Promise = require('bluebird');
 
-const sequelize = require('./src/db');
+const {sequelize} = require('./src/models');
 const config = require('./src/config');
 const app = require('./src/app');
 const logger = require('./src/libs/logger');

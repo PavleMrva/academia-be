@@ -1,10 +1,14 @@
-const db = require('../../db');
+module.exports = (sequelize) => {
+  const Admin = sequelize.define('Admin', {
 
-const Admin = db.define('Admin', {
+  }, {
+    underscored: true,
+    // Other model options go here
+  });
 
-}, {
-  underscored: true,
-  // Other model options go here
-});
+  Admin.associate = ({UsersModel}) => {
+    Admin.belongsTo(UsersModel, {as: 'user'});
+  };
 
-module.exports = Admin;
+  return Admin;
+};

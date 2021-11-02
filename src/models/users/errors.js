@@ -29,7 +29,7 @@ class UserWithEmailNotFound extends AuthError {
 
 class UserTypeWithUsernameNotFound extends AuthError {
   constructor(type, username) {
-    super(404, 'user_not_found', `User of type ${type} with username ${username} not found`);
+    super(404, 'user_by_type_not_found', `User of type ${type} with username ${username} not found`);
   }
 }
 
@@ -63,6 +63,12 @@ class EmailCannotBeEmpty extends AuthError {
   }
 }
 
+class UserTypeNotValid extends AuthError {
+  constructor(type) {
+    super(400, 'user_type_not_valid', `User type ${type} is invalid`);
+  }
+}
+
 module.exports = {
   AuthError,
   PasswordValidationError,
@@ -74,4 +80,5 @@ module.exports = {
   UsernameCannotBeEmpty,
   EmailInUse,
   EmailCannotBeEmpty,
+  UserTypeNotValid,
 };

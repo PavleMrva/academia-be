@@ -13,7 +13,7 @@ router.post('/auth/facebook', passport.authenticate('facebook-token', {session: 
 
 router.post('/auth/google', passport.authenticate('google-token', {session: false}), usersController.login);
 
-router.post('/:type(student|teacher|admin)/register', validate(checkSchema(registrationSchema)), usersController.register);
+router.post('/register', validate(checkSchema(registrationSchema)), usersController.register);
 
 router.post('/logout', usersController.logout);
 

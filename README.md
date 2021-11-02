@@ -13,7 +13,6 @@ This project consists of 4 layers: **API Layer**, **Controller Layer**, **Servic
 - `src/controllers` - Managers of services that communicate with the Service Layer to perform business logic
 - `src/services` - Internal "services" containing business logic that communicates with Data Access Layer (DAL)
 - `src/models` - Sequelize based models (DAL)
-- `src/db` - Sequelize database connection setup
 - `src/middleware` - Middleware functions (API key/JWT verification, default error handling etc.)
 - `src/libs` - Common libraries and utilities
 - `src/schemas` - Validation schemas

@@ -1,37 +1,34 @@
-'use strict';
+const {Sequelize, DataTypes} = require('sequelize');
+const logger = require('../libs/logger');
 
-const fs = require('fs');
-const path = require('path');
-const Sequelize = require('sequelize');
-const basename = path.basename(__filename);
-const env = process.env.NODE_ENV || 'development';
-const config = require(__dirname + '/../../config/config.json')[env];
-const db = {};
+const sequelize = new Sequelize('academia', 'root', '', {
+  host: 'localhost',
+  dialect: 'mysql',
+  logging: (msg) => logger.debug(msg),
+});
 
-let sequelize;
-if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable], config);
-} else {
-  sequelize = new Sequelize(config.database, config.username, config.password, config);
-}
+const models = {
+  AdminsModel: require('./admins')(sequelize, DataTypes),
+  // AssignmentsModel: require('./assignments')(sequelize, DataTypes),
+  CourseLecturesModel: require('./courseLectures')(sequelize, DataTypes),
+  CoursesModel: require('./courses')(sequelize, DataTypes),
+  LectureMaterialsModel: require('./lectureMaterials')(sequelize, DataTypes),
+  LecturesModel: require('./lectures')(sequelize, DataTypes),
+  StudentsModel: require('./students')(sequelize, DataTypes),
+  // Subscription: require('./subscriptions')(sequelize, DataTypes),
+  TeachersModel: require('./teachers')(sequelize, DataTypes),
+  UsersModel: require('./users')(sequelize, DataTypes),
+};
 
-fs
-  .readdirSync(__dirname)
-  .filter((file) => {
-    return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
-  })
-  .forEach((file) => {
-    const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes);
-    db[model.name] = model;
-  });
-
-Object.keys(db).forEach((modelName) => {
-  if (db[modelName].associate) {
-    db[modelName].associate(db);
+// Associate tables in the DB
+Object.keys(models).forEach((modelKey) => {
+  // Create model associations
+  if ('associate' in models[modelKey]) {
+    models[modelKey].associate(models);
   }
 });
 
-db.sequelize = sequelize;
-db.Sequelize = Sequelize;
+models.sequelize = sequelize;
+models.Sequelize = Sequelize;
 
-module.exports = db;
+module.exports = models;

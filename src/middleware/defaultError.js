@@ -1,6 +1,6 @@
 const {v4: uuid} = require('uuid');
 const {ValidationError} = require('sequelize');
-const UsersModel = require('../models/users');
+const {UsersModel} = require('../models');
 const config = require('../config');
 
 module.exports = (err, req, res, next) => {

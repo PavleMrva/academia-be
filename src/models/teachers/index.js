@@ -1,10 +1,15 @@
-const db = require('../../db');
+module.exports = (sequelize, DataTypes) => {
+  const Teacher = sequelize.define('Teacher', {
 
-const Teacher = db.define('Teacher', {
+  }, {
+    underscored: true,
+    // Other model options go here
+  });
 
-}, {
-  underscored: true,
-  // Other model options go here
-});
+  Teacher.associate = ({UsersModel, LecturesModel}) => {
+    Teacher.belongsTo(UsersModel, {as: 'user'});
+    Teacher.hasMany(LecturesModel, {as: 'lecture'});
+  };
 
-module.exports = Teacher;
+  return Teacher;
+};

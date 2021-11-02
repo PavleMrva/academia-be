@@ -2,7 +2,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const FacebookTokenStrategy = require('passport-facebook-token');
 const GoogleTokenStrategy = require('passport-google-token').Strategy;
-const UsersModel = require('../models/users');
+const {UsersModel} = require('../models');
 const config = require('../config');
 
 module.exports = () => {
