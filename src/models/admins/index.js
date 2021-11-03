@@ -2,8 +2,8 @@ module.exports = (sequelize) => {
   const Admin = sequelize.define('Admin', {
 
   }, {
-    underscored: true,
     // Other model options go here
+    underscored: true,
   });
 
   Admin.associate = ({UsersModel}) => {

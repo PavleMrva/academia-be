@@ -9,9 +9,9 @@ router.get('/', usersController.getAllUsers);
 
 router.post('/login', validate(checkSchema(loginSchema)), passport.authenticate('local', {session: false}), usersController.login);
 
-router.post('/auth/facebook', passport.authenticate('facebook-token', {session: false}), usersController.login);
+router.post('/facebook/auth', passport.authenticate('facebook-token', {session: false}), usersController.login);
 
-router.post('/auth/google', passport.authenticate('google-token', {session: false}), usersController.login);
+router.post('/google/auth', passport.authenticate('google-token', {session: false}), usersController.login);
 
 router.post('/register', validate(checkSchema(registrationSchema)), usersController.register);
 

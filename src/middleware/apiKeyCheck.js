@@ -2,19 +2,9 @@ const config = require('../config');
 
 module.exports = (req, res, next) => {
   const bearerApiKey = 'Bearer ' + config.apiKey;
+  const whitelistRoutesRegex = new RegExp(/\/(login|register|auth)$/);
 
-  const whitelistRoutes = [
-    '/api/v1/ping',
-    // TODO: change routes below
-    '/api/v1/users/login',
-    '/api/v1/users/auth/facebook',
-    '/api/v1/users/auth/google',
-    '/api/v1/users/student/register',
-    '/api/v1/users/teacher/register',
-    '/api/v1/users/admin/register',
-  ];
-
-  if (whitelistRoutes.includes(req.path)) {
+  if (whitelistRoutesRegex.test(req.path)) {
     return next();
   }
 

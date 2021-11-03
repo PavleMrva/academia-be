@@ -1,76 +1,67 @@
-class AuthError extends Error {
-  constructor(statusCode, name, message, data = null) {
-    super();
-    this.statusCode = statusCode;
-    this.name = name;
-    this.message = message;
-    this.data = data;
-  }
-}
+const {BaseError} = require('../../common');
 
-class PasswordValidationError extends AuthError {
+class PasswordValidationError extends BaseError {
   constructor() {
     super(422, 'invalid_password_format',
       'Password must be word between 8 and 16 characters which is composed of at least one number, one symbol and one uppercase letter. Also, it mustn\'t be in the database of too simple passwords');
   }
 }
 
-class UserWithUsernameNotFound extends AuthError {
+class UserWithUsernameNotFound extends BaseError {
   constructor(username) {
     super(404, 'user_not_found', `User with username "${username}" not found`);
   }
 }
 
-class UserWithEmailNotFound extends AuthError {
+class UserWithEmailNotFound extends BaseError {
   constructor(email) {
     super(404, 'user_not_found', `User with email "${email}" not found`);
   }
 }
 
-class UserTypeWithUsernameNotFound extends AuthError {
+class UserTypeWithUsernameNotFound extends BaseError {
   constructor(type, username) {
     super(404, 'user_by_type_not_found', `User of type ${type} with username ${username} not found`);
   }
 }
 
-class UserPasswordIncorrect extends AuthError {
+class UserPasswordIncorrect extends BaseError {
   constructor() {
     super(400, 'user_password_incorrect', 'User password is incorrect');
   }
 }
 
-class UsernameAlreadyInUse extends AuthError {
+class UsernameAlreadyInUse extends BaseError {
   constructor(username) {
     super(400, 'username_in_use', `Username ${username} already in use`);
   }
 }
 
-class UsernameCannotBeEmpty extends AuthError {
+class UsernameCannotBeEmpty extends BaseError {
   constructor(username) {
     super(400, 'username_empty', 'Username cannot be empty');
   }
 }
 
-class EmailInUse extends AuthError {
+class EmailInUse extends BaseError {
   constructor(email) {
     super(400, 'username_in_use', `Email ${email} already in use`);
   }
 }
 
-class EmailCannotBeEmpty extends AuthError {
+class EmailCannotBeEmpty extends BaseError {
   constructor() {
     super(400, 'email_empty', 'Email cannot be empty');
   }
 }
 
-class UserTypeNotValid extends AuthError {
+class UserTypeNotValid extends BaseError {
   constructor(type) {
     super(400, 'user_type_not_valid', `User type ${type} is invalid`);
   }
 }
 
 module.exports = {
-  AuthError,
   PasswordValidationError,
   UserWithUsernameNotFound,
   UserWithEmailNotFound,

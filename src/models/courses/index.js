@@ -4,17 +4,24 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    price: {
-      type: DataTypes.DOUBLE,
-      allowNull: false,
-    },
   }, {
-    underscored: true,
     // Other model options go here
+    underscored: true,
   });
 
-  Course.associate = ({LecturesModel, CourseLecturesModel}) => {
+  Course.associate = ({
+    LecturesModel,
+    CourseLecturesModel,
+    StudentCourseDetailsModel,
+    AssignmentsModel,
+    SubscriptionsModel,
+    CoursePricesModel,
+  }) => {
     Course.belongsToMany(LecturesModel, {through: CourseLecturesModel});
+    Course.hasMany(StudentCourseDetailsModel);
+    Course.hasMany(AssignmentsModel);
+    Course.hasMany(SubscriptionsModel);
+    Course.hasMany(CoursePricesModel);
   };
 
   return Course;

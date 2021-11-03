@@ -1,6 +1,6 @@
 const {v4: uuid} = require('uuid');
 const {ValidationError} = require('sequelize');
-const {UsersModel} = require('../models');
+const {BaseError} = require('../common');
 const config = require('../config');
 
 module.exports = (err, req, res, next) => {
@@ -23,7 +23,7 @@ module.exports = (err, req, res, next) => {
     });
   }
 
-  if (err instanceof UsersModel.Errors.AuthError) {
+  if (err instanceof BaseError) {
     return res.status(err.statusCode).json({
       info: {
         success: false,

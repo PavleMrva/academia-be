@@ -2,8 +2,8 @@ module.exports = (sequelize, DataTypes) => {
   const Teacher = sequelize.define('Teacher', {
 
   }, {
-    underscored: true,
     // Other model options go here
+    underscored: true,
   });
 
   Teacher.associate = ({UsersModel, LecturesModel}) => {

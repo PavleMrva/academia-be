@@ -9,13 +9,17 @@ const sequelize = new Sequelize('academia', 'root', '', {
 
 const models = {
   AdminsModel: require('./admins')(sequelize, DataTypes),
-  // AssignmentsModel: require('./assignments')(sequelize, DataTypes),
+  AssignmentsModel: require('./assignments')(sequelize, DataTypes),
+  AssignmentSubmissionsModel: require('./assignmentSubmissions')(sequelize, DataTypes),
   CourseLecturesModel: require('./courseLectures')(sequelize, DataTypes),
+  CoursePricesModel: require('./coursePrices')(sequelize, DataTypes),
   CoursesModel: require('./courses')(sequelize, DataTypes),
   LectureMaterialsModel: require('./lectureMaterials')(sequelize, DataTypes),
   LecturesModel: require('./lectures')(sequelize, DataTypes),
+  PaymentsModel: require('./payments')(sequelize, DataTypes),
+  StudentCourseDetailsModel: require('./studentCourseDetails')(sequelize, DataTypes),
   StudentsModel: require('./students')(sequelize, DataTypes),
-  // Subscription: require('./subscriptions')(sequelize, DataTypes),
+  SubscriptionsModel: require('./subscriptions')(sequelize, DataTypes),
   TeachersModel: require('./teachers')(sequelize, DataTypes),
   UsersModel: require('./users')(sequelize, DataTypes),
 };

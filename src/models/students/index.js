@@ -34,12 +34,20 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
   }, {
-    underscored: true,
     // Other model options go here
+    underscored: true,
   });
 
-  Student.associate = ({UsersModel}) => {
+  Student.associate = ({
+    UsersModel,
+    StudentCourseDetailsModel,
+    AssignmentSubmissionsModel,
+    SubscriptionsModel,
+  }) => {
     Student.belongsTo(UsersModel, {as: 'user'});
+    Student.hasMany(StudentCourseDetailsModel);
+    Student.hasMany(AssignmentSubmissionsModel);
+    Student.hasMany(SubscriptionsModel);
   };
 
   return Student;
