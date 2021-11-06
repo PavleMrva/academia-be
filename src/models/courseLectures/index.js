@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const CourseLecture = sequelize.define('CourseLecture', {
+  const CourseLecture = sequelize.define('course_lecture', {
 
   }, {
     // Other model options go here

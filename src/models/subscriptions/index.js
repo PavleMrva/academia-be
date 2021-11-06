@@ -1,7 +1,7 @@
 const errors = require('./errors');
 
 module.exports = (sequelize, DataTypes) => {
-  const Subscription = sequelize.define('Subscription', {
+  const Subscription = sequelize.define('subscription', {
     subscriptionStartDate: {
       type: DataTypes.DATE,
       allowNull: false,

@@ -1,5 +1,5 @@
 module.exports = (sequelize) => {
-  const Admin = sequelize.define('Admin', {
+  const Admin = sequelize.define('admin', {
 
   }, {
     // Other model options go here

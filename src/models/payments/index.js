@@ -2,7 +2,7 @@ const {v4: uuid} = require('uuid');
 const errors = require('./errors');
 
 module.exports = (sequelize, DataTypes) => {
-  const Payment = sequelize.define('Payment', {
+  const Payment = sequelize.define('payment', {
     amount: {
       type: DataTypes.DOUBLE,
       allowNull: false,
@@ -34,11 +34,11 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
     currency: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
         isIn: {
-          args: [['']],
+          args: [[1, 2, 3, 4, 5]],
           msg: 'Rating can be between 1 and 5',
         },
       },

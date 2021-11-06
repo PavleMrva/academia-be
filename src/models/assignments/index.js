@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const Assignment = sequelize.define('Assignment', {
+  const Assignment = sequelize.define('assignment', {
     description: {
       type: DataTypes.TEXT,
       allowNull: false,
@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
 
   Assignment.associate = ({CoursesModel, AssignmentSubmissionsModel}) => {
     Assignment.belongsTo(CoursesModel);
-    Assignment.hasMany(AssignmentSubmissionsModel);
+    Assignment.hasMany(AssignmentSubmissionsModel, {onDelete: 'cascade'});
   };
 
   return Assignment;

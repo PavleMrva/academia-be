@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const AssignmentSubmission = sequelize.define('AssignmentSubmission', {
+  const AssignmentSubmission = sequelize.define('assignment_submission', {
     grade: {
       type: DataTypes.STRING,
       validate: {

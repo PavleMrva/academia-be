@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const StudentCourseDetails = sequelize.define('StudentCourseDetails', {
+  const StudentCourseDetails = sequelize.define('student_course_details', {
     grade: {
       type: DataTypes.STRING,
       allowNull: false,

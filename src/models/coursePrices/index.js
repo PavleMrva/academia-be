@@ -1,7 +1,7 @@
 const errors = require('./errors');
 
 module.exports = (sequelize, DataTypes) => {
-  const CoursePrice = sequelize.define('CoursePrice', {
+  const CoursePrice = sequelize.define('course_price', {
     price: {
       type: DataTypes.DOUBLE,
       allowNull: false,

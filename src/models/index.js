@@ -11,6 +11,8 @@ const models = {
   AdminsModel: require('./admins')(sequelize, DataTypes),
   AssignmentsModel: require('./assignments')(sequelize, DataTypes),
   AssignmentSubmissionsModel: require('./assignmentSubmissions')(sequelize, DataTypes),
+  CourseCategoriesModel: require('./courseCategories')(sequelize, DataTypes),
+  CourseLanguagesModel: require('./courseLanguages')(sequelize, DataTypes),
   CourseLecturesModel: require('./courseLectures')(sequelize, DataTypes),
   CoursePricesModel: require('./coursePrices')(sequelize, DataTypes),
   CoursesModel: require('./courses')(sequelize, DataTypes),

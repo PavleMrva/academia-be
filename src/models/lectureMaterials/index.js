@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const LectureMaterial = sequelize.define('LectureMaterial', {
+  const LectureMaterial = sequelize.define('lecture_material', {
     type: {
       type: DataTypes.STRING,
       allowNull: false,

@@ -1,4 +1,4 @@
-const {UsersModel} = require('../models');
+const {UsersModel} = require('../../models');
 
 const loginSchema = {
   username: {

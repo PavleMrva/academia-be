@@ -45,9 +45,9 @@ module.exports = (sequelize, DataTypes) => {
     SubscriptionsModel,
   }) => {
     Student.belongsTo(UsersModel, {as: 'user'});
-    Student.hasMany(StudentCourseDetailsModel);
-    Student.hasMany(AssignmentSubmissionsModel);
-    Student.hasMany(SubscriptionsModel);
+    Student.hasMany(StudentCourseDetailsModel, {onDelete: 'cascade'});
+    Student.hasMany(AssignmentSubmissionsModel, {onDelete: 'cascade'});
+    Student.hasMany(SubscriptionsModel, {onDelete: 'cascade'});
   };
 
   return Student;
