@@ -37,7 +37,7 @@ module.exports = (sequelize, DataTypes) => {
     deleted: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
-      defaultValue: true,
+      defaultValue: false,
     },
   }, {
     // Other model options go here
@@ -61,8 +61,8 @@ module.exports = (sequelize, DataTypes) => {
     Course.hasMany(AssignmentsModel, {onDelete: 'cascade'});
     Course.hasMany(SubscriptionsModel, {onDelete: 'cascade'});
     Course.hasMany(CoursePricesModel, {onDelete: 'cascade'});
-    Course.belongsTo(CourseCategoriesModel);
-    Course.belongsTo(CourseLanguagesModel);
+    Course.belongsTo(CourseCategoriesModel, {foreignKey: {allowNull: false}});
+    Course.belongsTo(CourseLanguagesModel, {foreignKey: {allowNull: false}});
   };
 
   return Course;

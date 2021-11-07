@@ -10,6 +10,7 @@ const {
 // COURSE CATEGORIES
 const getAllCourses = () => {
   return CoursesModel.findAll({
+    where: {deleted: false},
     attributes: ['guid', 'name'],
     include: [{
       model: CourseCategoriesModel,
@@ -28,8 +29,8 @@ const getAllCourses = () => {
 
 const getCourseById = (courseId) => {
   return CoursesModel.findOne({
-    where: {id: courseId},
-    attributes: ['guid', 'name'],
+    where: {id: courseId, deleted: false},
+    attributes: ['name'],
     include: [{
       model: CourseCategoriesModel,
       where: {deleted: false},
@@ -49,7 +50,7 @@ const getCourseById = (courseId) => {
 };
 
 const createCourse = async (name, description, type, coursePrices, categoryId, languageId) => {
-  return await sequelize.transaction(async (t) => {
+  const course = await sequelize.transaction(async (t) => {
     const course = await CoursesModel.create({
       name,
       type,
@@ -69,21 +70,26 @@ const createCourse = async (name, description, type, coursePrices, categoryId, l
     });
     return course;
   });
+
+  return getCourseById(course.id);
 };
 
 const updateCourse = async (courseId, name, description, type, categoryId, languageId) => {
-  return await sequelize.transaction(async (t) => {
-    return await CoursesModel.update({
-      name,
-      type,
-      description,
-      courseCategoryId: categoryId,
-      courseLanguageId: languageId,
-    }, {
-      where: {id: courseId},
-      transaction: t,
-    });
+  await CoursesModel.update({
+    name,
+    type,
+    description,
+    courseCategoryId: categoryId,
+    courseLanguageId: languageId,
+  }, {
+    where: {id: courseId},
   });
+
+  return getCourseById(courseId);
+};
+
+const updateCoursePrice = async (courseId, coursePrice) => {
+  return await CoursePricesModel.upsert({courseId, ...coursePrice}, {courseId, currency: coursePrice.currency});
 };
 
 const deleteCourse = (courseId) => {
@@ -97,5 +103,6 @@ module.exports = {
   getCourseById,
   createCourse,
   updateCourse,
+  updateCoursePrice,
   deleteCourse,
 };

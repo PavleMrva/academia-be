@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   LectureMaterial.associate = ({LecturesModel}) => {
-    LectureMaterial.belongsTo(LecturesModel, {as: 'lecture'});
+    LectureMaterial.belongsTo(LecturesModel, {as: 'lecture', foreignKey: {allowNull: false}});
   };
 
   return LectureMaterial;

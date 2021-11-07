@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
 
   Lecture.associate = ({LectureMaterialsModel, TeachersModel, CoursesModel, CourseLecturesModel}) => {
     Lecture.hasMany(LectureMaterialsModel, {as: 'lecture_material', onDelete: 'cascade'});
-    Lecture.belongsTo(TeachersModel, {as: 'teacher'});
+    Lecture.belongsTo(TeachersModel, {as: 'teacher', foreignKey: {allowNull: false}});
     Lecture.belongsToMany(CoursesModel, {through: CourseLecturesModel});
   };
 

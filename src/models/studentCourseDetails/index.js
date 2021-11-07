@@ -34,8 +34,8 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   StudentCourseDetails.associate = ({StudentsModel, CoursesModel}) => {
-    StudentCourseDetails.belongsTo(StudentsModel);
-    StudentCourseDetails.belongsTo(CoursesModel);
+    StudentCourseDetails.belongsTo(StudentsModel, {foreignKey: {allowNull: false}});
+    StudentCourseDetails.belongsTo(CoursesModel, {foreignKey: {allowNull: false}});
   };
 
   return StudentCourseDetails;

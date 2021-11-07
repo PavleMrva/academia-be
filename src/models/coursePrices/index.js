@@ -26,10 +26,29 @@ module.exports = (sequelize, DataTypes) => {
     // Other model options go here
     underscored: true,
     timestamps: false,
+    indexes: [
+      {
+        unique: true,
+        fields: ['course_id', 'currency'],
+      },
+    ],
   });
 
   CoursePrice.associate = ({CoursesModel}) => {
-    CoursePrice.belongsTo(CoursesModel);
+    CoursePrice.belongsTo(CoursesModel, {foreignKey: {allowNull: false}});
+  };
+
+  CoursePrice.upsert = (values, condition) => {
+    return CoursePrice
+      .findOne({where: condition})
+      .then((coursePrice) => {
+        // update
+        if (coursePrice) {
+          return coursePrice.update(values);
+        }
+        // insert
+        return CoursePrice.create(values);
+      });
   };
 
   return CoursePrice;

@@ -21,23 +21,23 @@ const getAllUsers = () => {
   });
 };
 
-const authenticate = async (username, type) => {
+const authenticate = async (username) => {
   const user = await UsersModel.findOne({
     where: {username},
-    attributes: ['id', 'username', 'email', ['first_name', 'firstName'], ['last_name', 'lastName'], 'password'],
+    attributes: ['id', 'username', 'email', ['first_name', 'firstName'], ['last_name', 'lastName'], 'password', 'type'],
   });
 
   let userExists;
-  if (type === USER_TYPES.STUDENT) {
+  if (user.type === USER_TYPES.STUDENT) {
     userExists = await user.getStudent();
-  } else if (type === USER_TYPES.TEACHER) {
+  } else if (user.type === USER_TYPES.TEACHER) {
     userExists = await user.getTeacher();
   } else {
     userExists = await user.getAdmin();
   }
 
   if (!userExists) {
-    throw new UsersModel.Errors.UserTypeWithUsernameNotFound(type, username);
+    throw new UsersModel.Errors.UserTypeWithUsernameNotFound(user.type, username);
   }
 };
 

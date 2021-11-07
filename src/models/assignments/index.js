@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   Assignment.associate = ({CoursesModel, AssignmentSubmissionsModel}) => {
-    Assignment.belongsTo(CoursesModel);
+    Assignment.belongsTo(CoursesModel, {foreignKey: {allowNull: false}});
     Assignment.hasMany(AssignmentSubmissionsModel, {onDelete: 'cascade'});
   };
 

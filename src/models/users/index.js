@@ -81,6 +81,16 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
     },
+    type: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        isIn: {
+          args: [['student', 'teacher', 'admin']],
+          msg: 'Type can only be: student, teacher or admin',
+        },
+      },
+    },
   }, {
     // Other model options go here
     underscored: true,

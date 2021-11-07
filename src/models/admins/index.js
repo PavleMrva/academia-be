@@ -7,7 +7,7 @@ module.exports = (sequelize) => {
   });
 
   Admin.associate = ({UsersModel}) => {
-    Admin.belongsTo(UsersModel, {as: 'user'});
+    Admin.belongsTo(UsersModel, {as: 'user', foreignKey: {allowNull: false}});
   };
 
   return Admin;

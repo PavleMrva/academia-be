@@ -28,8 +28,8 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   AssignmentSubmission.associate = ({StudentsModel, AssignmentsModel}) => {
-    AssignmentSubmission.belongsTo(StudentsModel);
-    AssignmentSubmission.belongsTo(AssignmentsModel);
+    AssignmentSubmission.belongsTo(StudentsModel, {foreignKey: {allowNull: false}});
+    AssignmentSubmission.belongsTo(AssignmentsModel, {foreignKey: {allowNull: false}});
   };
 
   return AssignmentSubmission;

@@ -5,13 +5,14 @@ const {
 // COURSE CATEGORIES
 const getAllCourseCategories = () => {
   return CourseCategoriesModel.findAll({
+    where: {deleted: false},
     attributes: ['name'],
   });
 };
 
 const getCourseCategoryById = (categoryId) => {
   return CourseCategoriesModel.findOne({
-    where: {id: categoryId},
+    where: {id: categoryId, deleted: false},
   });
 };
 

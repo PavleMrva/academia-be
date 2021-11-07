@@ -27,9 +27,9 @@ module.exports = (sequelize, DataTypes) => {
     StudentsModel,
     PaymentsModel,
   }) => {
-    Subscription.belongsTo(StudentsModel);
-    Subscription.belongsTo(CoursesModel);
-    Subscription.belongsTo(PaymentsModel);
+    Subscription.belongsTo(StudentsModel, {foreignKey: {allowNull: false}});
+    Subscription.belongsTo(CoursesModel, {foreignKey: {allowNull: false}});
+    Subscription.belongsTo(PaymentsModel, {foreignKey: {allowNull: false}});
   };
 
   return Subscription;

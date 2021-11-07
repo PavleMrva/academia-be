@@ -8,8 +8,7 @@ const getAllUsers = async (req, res) => {
 
 const login = async (req, res, next) => {
   const user = req.user;
-  const {type} = req.body;
-  await usersService.authenticate(user.username, type);
+  await usersService.authenticate(user.username);
 
   const {
     accessToken,

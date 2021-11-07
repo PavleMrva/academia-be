@@ -11,7 +11,7 @@ router.get('/', coursesController.getAllCourses);
 router.post('/', validate(checkSchema(courseSchema)), coursesController.addCourse);
 router.get('/:courseId', coursesController.getCourse);
 router.put('/:courseId', validate(checkSchema(courseSchema)), coursesController.editCourse);
-// TODO: Add route for course price update
+router.patch('/:courseId/price', coursesController.addPrice);
 router.delete('/:courseId', coursesController.removeCourse);
 
 // COURSE CATEGORIES

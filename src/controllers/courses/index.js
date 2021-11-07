@@ -47,6 +47,18 @@ const editCourse = async (req, res) => {
   return res.success(course);
 };
 
+const addPrice = async (req, res) => {
+  const {courseId} = req.params;
+  const {coursePrice} = req.body;
+
+  if (!coursePrice) {
+    return res.missingParams();
+  }
+
+  const newPrice = await coursesService.updateCoursePrice(courseId, coursePrice);
+  return res.success(newPrice);
+};
+
 const removeCourse = async (req, res) => {
   const {courseId} = req.params;
   await coursesService.deleteCourse(courseId);
@@ -58,5 +70,6 @@ module.exports = {
   getCourse,
   addCourse,
   editCourse,
+  addPrice,
   removeCourse,
 };

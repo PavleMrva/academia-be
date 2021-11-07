@@ -5,13 +5,14 @@ const {
 // COURSE CATEGORIES
 const getAllCourseLanguages = () => {
   return CourseLanguagesModel.findAll({
+    where: {deleted: false},
     attributes: ['name', 'code'],
   });
 };
 
 const getCourseLanguageById = (languageId) => {
   return CourseLanguagesModel.findOne({
-    where: {id: languageId},
+    where: {id: languageId, deleted: false},
   });
 };
 
