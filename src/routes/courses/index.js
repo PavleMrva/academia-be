@@ -1,16 +1,19 @@
 const router = require('express').Router();
 const validate = require('../../middleware/validateSchema');
 const {checkSchema} = require('express-validator');
-const {courses: {courseSchema}} = require('../../schemas');
+const {
+  courses: {saveCourseSchema},
+  search: {paginationSchema},
+} = require('../../schemas');
 const coursesController = require('../../controllers/courses');
 const courseCategoriesController = require('../../controllers/courseCategories');
 const courseLanguagesController = require('../../controllers/courseLanguages');
 
 // COURSES
-router.get('/', coursesController.getAllCourses);
-router.post('/', validate(checkSchema(courseSchema)), coursesController.addCourse);
+router.get('/', validate(checkSchema(paginationSchema)), coursesController.getAllCourses);
+router.post('/', validate(checkSchema(saveCourseSchema)), coursesController.addCourse);
 router.get('/:courseId', coursesController.getCourse);
-router.put('/:courseId', validate(checkSchema(courseSchema)), coursesController.editCourse);
+router.put('/:courseId', validate(checkSchema(saveCourseSchema)), coursesController.editCourse);
 router.patch('/:courseId/price', coursesController.addPrice);
 router.delete('/:courseId', coursesController.removeCourse);
 

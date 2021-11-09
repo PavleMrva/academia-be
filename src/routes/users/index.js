@@ -2,10 +2,13 @@ const router = require('express').Router();
 const passport = require('passport');
 const validate = require('../../middleware/validateSchema');
 const {checkSchema} = require('express-validator');
-const {auth: {loginSchema, registrationSchema}} = require('../../schemas');
+const {
+  auth: {loginSchema, registrationSchema},
+  search: {paginationSchema},
+} = require('../../schemas');
 const usersController = require('../../controllers/users');
 
-router.get('/', usersController.getAllUsers);
+router.get('/', validate(checkSchema(paginationSchema)), usersController.getAllUsers);
 
 router.post('/login', validate(checkSchema(loginSchema)), passport.authenticate('local', {session: false}), usersController.login);
 

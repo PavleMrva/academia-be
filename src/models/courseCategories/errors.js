@@ -1,9 +1,9 @@
 const {BaseError} = require('../../common');
 
 class CategoryDoesNotExist extends BaseError {
-  constructor() {
-    super(422, 'invalid_course_category',
-      'Course category is not valid');
+  constructor(category) {
+    super(404, 'category_not_found',
+      `Course category ${category} not valid`);
   }
 }
 

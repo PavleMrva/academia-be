@@ -2,7 +2,8 @@ const usersService = require('../../services/users');
 const authService = require('../../services/auth');
 
 const getAllUsers = async (req, res) => {
-  const users = await usersService.getAllUsers();
+  const {perPage, pageNum} = req.query;
+  const users = await usersService.getAllUsers(perPage, pageNum);
   return res.success(users);
 };
 

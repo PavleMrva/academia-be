@@ -1,6 +1,6 @@
 const {CourseCategoriesModel, CourseLanguagesModel} = require('../../models');
 
-const courseSchema = {
+const saveCourseSchema = {
   categoryId: {
     custom: {
       options: (value) => {
@@ -8,7 +8,7 @@ const courseSchema = {
           where: {id: value},
         }).then((category) => {
           if (!category) {
-            throw new CourseCategoriesModel.Errors.CategoryDoesNotExist();
+            throw new CourseCategoriesModel.Errors.CategoryDoesNotExist(value);
           }
         });
       },
@@ -21,7 +21,7 @@ const courseSchema = {
           where: {id: value},
         }).then((language) => {
           if (!language) {
-            throw new CourseLanguagesModel.Errors.LanguageDoesNotExist();
+            throw new CourseLanguagesModel.Errors.LanguageDoesNotExist(value);
           }
         });
       },
@@ -30,5 +30,5 @@ const courseSchema = {
 };
 
 module.exports = {
-  courseSchema,
+  saveCourseSchema,
 };

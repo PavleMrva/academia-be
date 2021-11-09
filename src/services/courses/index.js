@@ -1,5 +1,6 @@
 const {
   sequelize,
+  Sequelize: {Op},
   CoursesModel,
   CourseCategoriesModel,
   CourseLanguagesModel,
@@ -8,10 +9,16 @@ const {
 } = require('../../models');
 
 // COURSE CATEGORIES
-const getAllCourses = () => {
+const getAllCourses = (perPage, pageNum, name = null) => {
+  const nameQuery = name ? {name: {[Op.like]: `%${name}%`}} : {};
   return CoursesModel.findAll({
-    where: {deleted: false},
-    attributes: ['guid', 'name'],
+    where: {
+      ...nameQuery,
+      deleted: false,
+    },
+    attributes: ['name'],
+    limit: perPage,
+    offset: perPage * (pageNum - 1),
     include: [{
       model: CourseCategoriesModel,
       where: {deleted: false},
@@ -49,7 +56,7 @@ const getCourseById = (courseId) => {
   });
 };
 
-const createCourse = async (name, description, type, coursePrices, categoryId, languageId) => {
+const createCourse = async (name, description, type, categoryId, languageId, coursePrices = null) => {
   const course = await sequelize.transaction(async (t) => {
     const course = await CoursesModel.create({
       name,
@@ -61,13 +68,15 @@ const createCourse = async (name, description, type, coursePrices, categoryId, l
       transaction: t,
     });
 
-    const prices = coursePrices.map((price) => ({
-      courseId: course.id,
-      ...price,
-    }));
-    await CoursePricesModel.bulkCreate(prices, {
-      transaction: t,
-    });
+    if (coursePrices && coursePrices.length > 0) {
+      const prices = coursePrices.map((price) => ({
+        courseId: course.id,
+        ...price,
+      }));
+      await CoursePricesModel.bulkCreate(prices, {
+        transaction: t,
+      });
+    }
     return course;
   });
 

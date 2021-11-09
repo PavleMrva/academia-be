@@ -1,9 +1,9 @@
 const {BaseError} = require('../../common');
 
 class LanguageDoesNotExist extends BaseError {
-  constructor() {
-    super(422, 'invalid_course_language',
-      'Course language is not valid');
+  constructor(language) {
+    super(404, 'language_not_found',
+      `Course language ${language} not found`);
   }
 }
 

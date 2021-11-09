@@ -1,7 +1,8 @@
 const coursesService = require('../../services/courses');
 
 const getAllCourses = async (req, res) => {
-  const courses = await coursesService.getAllCourses();
+  const {name, perPage, pageNum} = req.query;
+  const courses = await coursesService.getAllCourses(perPage, pageNum, name);
   return res.success(courses);
 };
 
@@ -21,11 +22,7 @@ const addCourse = async (req, res) => {
     languageId,
   } = req.body;
 
-  if (!name || !description || !type || !coursePrices.length || !categoryId || !languageId) {
-    return res.missingParams();
-  }
-
-  const course = await coursesService.createCourse(name, description, type, coursePrices, categoryId, languageId);
+  const course = await coursesService.createCourse(name, description, type, categoryId, languageId, coursePrices);
   return res.success(course);
 };
 
@@ -38,10 +35,6 @@ const editCourse = async (req, res) => {
     categoryId,
     languageId,
   } = req.body;
-
-  if (!name || !description || !type || !categoryId || !languageId) {
-    return res.missingParams();
-  }
 
   const course = await coursesService.updateCourse(courseId, name, description, type, categoryId, languageId);
   return res.success(course);

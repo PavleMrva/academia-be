@@ -12,8 +12,10 @@ const USER_TYPES = {
   ADMIN: 'admin',
 };
 
-const getAllUsers = () => {
+const getAllUsers = (perPage, pageNum) => {
   return UsersModel.findAll({
+    limit: perPage,
+    offset: perPage * (pageNum - 1),
     include: [{
       model: StudentsModel,
     }],
