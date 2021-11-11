@@ -1,6 +1,18 @@
 const {CourseCategoriesModel, CourseLanguagesModel} = require('../../models');
 
 const saveCourseSchema = {
+  name: {
+    notEmpty: true,
+    errorMessage: 'Course name missing',
+  },
+  description: {
+    notEmpty: true,
+    errorMessage: 'Description missing',
+  },
+  type: {
+    notEmpty: true,
+    errorMessage: 'Course type missing',
+  },
   categoryId: {
     custom: {
       options: (value) => {
