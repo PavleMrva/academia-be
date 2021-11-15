@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
 
   Teacher.associate = ({UsersModel, LecturesModel}) => {
     Teacher.belongsTo(UsersModel, {as: 'user', foreignKey: {allowNull: false}});
-    Teacher.hasMany(LecturesModel, {as: 'lecture'});
+    Teacher.hasMany(LecturesModel, {as: 'lecture', onDelete: 'cascade'});
   };
 
   return Teacher;

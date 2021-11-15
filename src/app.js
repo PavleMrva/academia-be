@@ -1,17 +1,19 @@
 const express = require('express');
 const morgan = require('morgan');
 const passport = require('passport');
+const fileUpload = require('express-fileupload');
 const config = require('./config');
 const app = express();
 
 // Catch errors thrown in async functions
 require('express-async-errors');
 
-const {usersAPI, coursesAPI} = require('./routes');
+const {usersAPI, coursesAPI, lecturesAPI} = require('./routes');
 
 app
   .use(express.urlencoded({extended: false}))
   .use(express.json())
+  .use(fileUpload())
   .use(require('./middleware/expressPinoLogger'))
   .use(require('response-time')());
 
@@ -32,7 +34,7 @@ require('./middleware/passport')();
 
 // app.use('/api/v1/assignments', );
 app.use('/api/v1/courses', coursesAPI);
-// app.use('/api/v1/lectures', );
+app.use('/api/v1/lectures', lecturesAPI);
 // app.use('/api/v1/subscriptions', );
 app.use('/api/v1/users', usersAPI);
 app.get('/api/v1/ping', (req, res) => {

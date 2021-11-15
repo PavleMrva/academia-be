@@ -3,16 +3,15 @@ module.exports = (sequelize, DataTypes) => {
     type: {
       type: DataTypes.STRING,
       allowNull: false,
-      validate: {
-        isIn: {
-          args: [['video', 'audio', 'pdf']],
-          msg: 'Lecture type can only be: video, audio or pdf',
-        },
-      },
     },
-    link: {
-      type: DataTypes.TEXT,
+    fileName: {
+      type: DataTypes.STRING,
       allowNull: false,
+    },
+    deleted: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
     },
   }, {
     // Other model options go here

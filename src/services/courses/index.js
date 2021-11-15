@@ -34,8 +34,8 @@ const getAllCourses = (perPage, pageNum, name = null) => {
   });
 };
 
-const getCourseById = (courseId) => {
-  return CoursesModel.findOne({
+const getCourseById = async (courseId) => {
+  const course = await CoursesModel.findOne({
     where: {id: courseId, deleted: false},
     attributes: ['name'],
     include: [{
@@ -54,6 +54,11 @@ const getCourseById = (courseId) => {
       attributes: ['title'],
     }],
   });
+
+  if (!course) {
+    throw new CoursesModel.Errors.CourseNotFoundById(courseId);
+  }
+  return course;
 };
 
 const createCourse = async (name, description, type, categoryId, languageId, coursePrices = null) => {

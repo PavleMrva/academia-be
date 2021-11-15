@@ -1,12 +1,12 @@
 const {BaseError} = require('../../common');
 
-class CourseDoesNotExist extends BaseError {
-  constructor(name) {
+class CourseNotFoundById extends BaseError {
+  constructor(id) {
     super(404, 'course_not_found',
-      `Course with name ${name} not found`);
+      `Course with id ${id} not found`);
   }
 }
 
 module.exports = {
-  CourseDoesNotExist,
+  CourseNotFoundById,
 };

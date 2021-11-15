@@ -40,11 +40,11 @@ function setupServer() {
 
 function setupProcessListeners() {
   process.on('uncaughtException', (err) => {
-    logger.error('uncaughtException', err);
+    logger.error({err}, 'uncaughtException');
   });
 
   process.on('unhandledRejection', (err) => {
-    logger.error('unhandledRejection', err);
+    logger.error({err}, 'unhandledRejection');
   });
 
   ['SIGINT', 'SIGTERM'].map((signal) => {
