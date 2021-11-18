@@ -3,6 +3,7 @@ const {
   Sequelize: {Op},
   LecturesModel,
   LectureMaterialsModel,
+  CourseLecturesModel,
 } = require('../../models');
 
 const getAllLectures = (perPage, pageNum, title = null) => {
@@ -18,6 +19,7 @@ const getAllLectures = (perPage, pageNum, title = null) => {
       model: LectureMaterialsModel,
       where: {deleted: false},
       as: 'lecture_material',
+      required: false,
     }],
   });
 };
@@ -29,6 +31,7 @@ const getLectureById = async (lectureId) => {
       model: LectureMaterialsModel,
       where: {deleted: false},
       as: 'lecture_material',
+      required: false,
     }],
   });
 
@@ -64,6 +67,40 @@ const createLecture = async (teacherId, title, description, files) => {
   return getLectureById(lecture.id);
 };
 
+const updateLecture = async (lectureId, title, description) => {
+  await LecturesModel.update({
+    title,
+    description,
+  }, {
+    where: {id: lectureId},
+  });
+
+  return getLectureById(lectureId);
+};
+
+const addLectureMaterial = async (lectureId, files) => {
+  const lectureFiles = files.map((file) => ({
+    type: file.type,
+    fileName: file.name,
+    lectureId: lectureId,
+  }));
+  await LectureMaterialsModel.bulkCreate(lectureFiles);
+
+  return getLectureById(lectureId);
+};
+
+const addLectureToCourse = async (lectureId, courseId) => {
+  return CourseLecturesModel.create({
+    lectureId,
+    courseId,
+  });
+};
+
+const removeLectureMaterial = async (lectureId, files) => {
+  await LectureMaterialsModel.destroy({where: {fileName: files}});
+  return getLectureById(lectureId);
+};
+
 const deleteLecture = (lectureId) => {
   return LecturesModel.update({deleted: true}, {
     where: {id: lectureId},
@@ -74,5 +111,9 @@ module.exports = {
   getAllLectures,
   getLectureById,
   createLecture,
+  updateLecture,
+  addLectureMaterial,
+  removeLectureMaterial,
+  addLectureToCourse,
   deleteLecture,
 };

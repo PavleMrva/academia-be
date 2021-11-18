@@ -1,4 +1,18 @@
-const {CourseCategoriesModel, CourseLanguagesModel} = require('../../models');
+const {CoursesModel, CourseCategoriesModel, CourseLanguagesModel} = require('../../models');
+
+const findCourseSchema = {
+  courseId: {
+    custom: {
+      in: ['params'],
+      options: async (value) => {
+        const lecture = await CoursesModel.findOne({where: {id: value}});
+        if (!lecture) {
+          throw new CoursesModel.Errors.CourseNotFoundById(value);
+        }
+      },
+    },
+  },
+};
 
 const saveCourseSchema = {
   name: {
@@ -43,4 +57,5 @@ const saveCourseSchema = {
 
 module.exports = {
   saveCourseSchema,
+  findCourseSchema,
 };

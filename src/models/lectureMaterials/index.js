@@ -1,3 +1,5 @@
+const errors = require('./errors');
+
 module.exports = (sequelize, DataTypes) => {
   const LectureMaterial = sequelize.define('lecture_material', {
     type: {
@@ -17,6 +19,8 @@ module.exports = (sequelize, DataTypes) => {
     // Other model options go here
     underscored: true,
   });
+
+  LectureMaterial.Errors = errors;
 
   LectureMaterial.associate = ({LecturesModel}) => {
     LectureMaterial.belongsTo(LecturesModel, {as: 'lecture', foreignKey: {allowNull: false}});

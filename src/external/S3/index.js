@@ -5,11 +5,9 @@ const {
   S3Client,
   ListBucketsCommand,
   GetObjectCommand,
-  PutObjectCommand,
+  DeleteObjectCommand,
 } = require('@aws-sdk/client-s3');
 const {Upload} = require('@aws-sdk/lib-storage');
-const {getSignedUrl} = require('@aws-sdk/s3-request-presigner');
-const {createPresignedPost} = require('@aws-sdk/s3-presigned-post');
 const {
   ExternalServiceUnreachable,
   ExternalServiceClientError,
@@ -54,6 +52,24 @@ class S3Service {
 
     try {
       return await this.#client.send(new GetObjectCommand(params));
+    } catch (err) {
+      this.handleError(err);
+    }
+  }
+
+  /**
+   * Remove object
+   *
+   * @param {string} fileName
+   */
+  async removeFile(fileName) {
+    const params = {
+      Key: fileName,
+      Bucket: this.#bucket,
+    };
+
+    try {
+      return await this.#client.send(new DeleteObjectCommand(params));
     } catch (err) {
       this.handleError(err);
     }

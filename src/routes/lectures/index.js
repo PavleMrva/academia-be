@@ -1,9 +1,16 @@
 const router = require('express').Router();
-const {upload} = require('../../external');
 const validate = require('../../middleware/validateSchema');
 const {checkSchema} = require('express-validator');
 const {
-  lectures: {saveLectureSchema},
+  lectures: {
+    saveLectureSchema,
+    addLectureMaterialSchema,
+    removeLectureMaterialSchema,
+    findLectureSchema,
+  },
+  courses: {
+    findCourseSchema,
+  },
   search: {paginationSchema},
 } = require('../../schemas');
 const lecturesController = require('../../controllers/lectures');
@@ -12,9 +19,10 @@ const lecturesController = require('../../controllers/lectures');
 router.get('/', validate(checkSchema(paginationSchema)), lecturesController.getAllLectures);
 router.post('/', validate(checkSchema(saveLectureSchema)), lecturesController.addLecture);
 router.get('/:lectureId', lecturesController.getLecture);
-// router.put('/:lectureId', validate(checkSchema(saveLectureSchema)), lecturesController.editLecture);
-// router.patch('/:lectureId/material', lecturesController.addLectureMaterial);
-// router.patch('/:lectureId/course/:courseId', lecturesController.addLectureToCourse);
-router.delete('/:lectureId', lecturesController.removeLecture);
+router.put('/:lectureId', validate(checkSchema(saveLectureSchema)), lecturesController.editLecture);
+router.patch('/:lectureId/material', validate(checkSchema(addLectureMaterialSchema)), lecturesController.addLectureMaterial);
+router.delete('/:lectureId/material', validate(checkSchema(removeLectureMaterialSchema)), lecturesController.removeLectureMaterial);
+router.patch('/:lectureId/course/:courseId', validate(checkSchema({...findLectureSchema, ...findCourseSchema})), lecturesController.addLectureToCourse);
+router.delete('/:lectureId', validate(checkSchema(findLectureSchema)), lecturesController.removeLecture);
 
 module.exports = router;
