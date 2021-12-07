@@ -4,6 +4,7 @@ const {checkSchema} = require('express-validator');
 const {
   lectures: {
     saveLectureSchema,
+    getLectureMaterialSchema,
     addLectureMaterialSchema,
     removeLectureMaterialSchema,
     findLectureSchema,
@@ -18,10 +19,14 @@ const lecturesController = require('../../controllers/lectures');
 // COURSES
 router.get('/', validate(checkSchema(paginationSchema)), lecturesController.getAllLectures);
 router.post('/', validate(checkSchema(saveLectureSchema)), lecturesController.addLecture);
+
 router.get('/:lectureId', lecturesController.getLecture);
 router.put('/:lectureId', validate(checkSchema(saveLectureSchema)), lecturesController.editLecture);
+
+router.get('/:lectureId/material', validate(checkSchema(getLectureMaterialSchema)), lecturesController.getLectureMaterial);
 router.patch('/:lectureId/material', validate(checkSchema(addLectureMaterialSchema)), lecturesController.addLectureMaterial);
 router.delete('/:lectureId/material', validate(checkSchema(removeLectureMaterialSchema)), lecturesController.removeLectureMaterial);
+
 router.patch('/:lectureId/course/:courseId', validate(checkSchema({...findLectureSchema, ...findCourseSchema})), lecturesController.addLectureToCourse);
 router.delete('/:lectureId', validate(checkSchema(findLectureSchema)), lecturesController.removeLecture);
 

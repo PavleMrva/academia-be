@@ -8,37 +8,7 @@ const logger = require('./src/libs/logger');
 
 let server;
 
-main();
-
-async function main() {
-  try {
-    setupProcessListeners();
-    await setupSequelize();
-    await setupServer();
-  } catch (err) {
-    logger.error('Error during bootstrap', err);
-    stopGracefully();
-  }
-}
-
-async function setupSequelize() {
-  try {
-    await sequelize.authenticate();
-    logger.info('Connection has been established successfully.');
-    // await sequelize.sync({force: true});
-    // logger.info('All models were synchronized successfully.');
-  } catch (error) {
-    logger.error(`Unable to connect to the database: ${error}`);
-  }
-}
-
-function setupServer() {
-  server = app.listen(config.nodePort, () => {
-    logger.info(`Listening on ${config.nodePort}`);
-  });
-}
-
-function setupProcessListeners() {
+const setupProcessListeners = () => {
   process.on('uncaughtException', (err) => {
     logger.error({err}, 'uncaughtException');
   });
@@ -50,9 +20,33 @@ function setupProcessListeners() {
   ['SIGINT', 'SIGTERM'].map((signal) => {
     process.once(signal, () => stopGracefully(signal));
   });
-}
+};
 
-async function stopGracefully(signal) {
+const setupSequelize = async () => {
+  try {
+    await sequelize.authenticate();
+    logger.info('Connection has been established successfully.');
+    // await sequelize.sync({force: true});
+    // logger.info('All models were synchronized successfully.');
+  } catch (error) {
+    logger.error(`Unable to connect to the database: ${error}`);
+  }
+};
+
+const setupServer = () => {
+  server = app.listen(config.nodePort, () => {
+    logger.info(`Listening on ${config.nodePort}`);
+  });
+};
+
+const stopServices = async () => {
+  await server.close();
+  logger.warn('HTTP server closed');
+  await sequelize.close();
+  logger.warn('MySQL connection closed');
+};
+
+const stopGracefully = async (signal) => {
   if (signal) {
     logger.warn(`Got ${signal} signal`);
   }
@@ -66,11 +60,17 @@ async function stopGracefully(signal) {
     logger.error('Could not stop gracefully, force stopping', {error: err});
     process.exit(1);
   }
-}
+};
 
-async function stopServices() {
-  await server.close();
-  logger.warn('HTTP server closed');
-  await sequelize.close();
-  logger.warn('MySQL connection closed');
-}
+const main = async () => {
+  try {
+    setupProcessListeners();
+    await setupSequelize();
+    await setupServer();
+  } catch (err) {
+    logger.error('Error during bootstrap', err);
+    stopGracefully();
+  }
+};
+
+main();

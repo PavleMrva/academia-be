@@ -1,7 +1,6 @@
 const lecturesService = require('../../services/lectures');
 const {S3} = require('../../external');
 const {Readable} = require('stream');
-const logger = require('../../libs/logger');
 
 const getAllLectures = async (req, res) => {
   const {name, perPage, pageNum} = req.query;
@@ -14,11 +13,6 @@ const getLecture = async (req, res) => {
   const lecture = await lecturesService.getLectureById(lectureId);
   return res.success(lecture);
 };
-
-// const getLectureImage = async (req, res) => {
-//   const readStream = await S3.getFile(req.params.lectureId);
-//   return readStream.Body.pipe(res);
-// };
 
 const addLecture = async (req, res) => {
   const {teacherId, title, description} = req.body;
@@ -74,6 +68,12 @@ const removeLectureMaterial = async (req, res) => {
   return res.success(lecture);
 };
 
+const getLectureMaterial = async (req, res) => {
+  const {fileName} = req.params;
+  const readStream = await S3.getFile(fileName);
+  return readStream.Body.pipe(res);
+};
+
 const removeLecture = async (req, res) => {
   const {lectureId} = req.params;
   await lecturesService.deleteLecture(lectureId);
@@ -89,4 +89,5 @@ module.exports = {
   addLectureToCourse,
   removeLectureMaterial,
   removeLecture,
+  getLectureMaterial,
 };

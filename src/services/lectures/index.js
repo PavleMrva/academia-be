@@ -97,13 +97,21 @@ const addLectureToCourse = async (lectureId, courseId) => {
 };
 
 const removeLectureMaterial = async (lectureId, files) => {
-  await LectureMaterialsModel.destroy({where: {fileName: files}});
+  await LectureMaterialsModel.update({deleted: true},
+    {where: {fileName: files}},
+  );
   return getLectureById(lectureId);
 };
 
 const deleteLecture = (lectureId) => {
   return LecturesModel.update({deleted: true}, {
     where: {id: lectureId},
+  });
+};
+
+const getLectureMaterial = (lectureId, lectureMaterialId) => {
+  return LectureMaterialsModel.findOne({
+    where: {id: lectureMaterialId, lectureId, deleted: false},
   });
 };
 
@@ -116,4 +124,5 @@ module.exports = {
   removeLectureMaterial,
   addLectureToCourse,
   deleteLecture,
+  getLectureMaterial,
 };

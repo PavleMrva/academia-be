@@ -54,9 +54,25 @@ const removeLectureMaterialSchema = {
   },
 };
 
+const getLectureMaterialSchema = {
+  ...findLectureSchema,
+  fileName: {
+    custom: {
+      options: async (value, {req}) => {
+        const {lectureId} = req.params;
+        const file = await LectureMaterialsModel.findOne({where: {value, lectureId}});
+        if (!file) {
+          throw new LectureMaterialsModel.Errors.FileNotFoundByName(value, lectureId);
+        }
+      },
+    },
+  },
+};
+
 module.exports = {
   saveLectureSchema,
   addLectureMaterialSchema,
   removeLectureMaterialSchema,
   findLectureSchema,
+  getLectureMaterialSchema,
 };
