@@ -23,6 +23,7 @@
     "express-pino-logger": "^6.0.0",
     "express-validator": "^6.13.0",
     "http-errors": "~1.6.3",
+    "iyzipay": "^2.0.48",
     "jsonwebtoken": "^8.5.1",
     "morgan": "~1.9.1",
     "passport": "^0.5.0",

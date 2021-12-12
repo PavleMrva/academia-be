@@ -2,7 +2,7 @@ const {
   CourseLanguagesModel,
 } = require('../../models');
 
-// COURSE CATEGORIES
+// COURSE LANGUAGES
 const getAllCourseLanguages = () => {
   return CourseLanguagesModel.findAll({
     where: {deleted: false},

@@ -35,6 +35,12 @@ module.exports = {
     region: process.env.S3_REGION,
   },
 
+  iyzipay: {
+    apiKey: process.env.IYZIPAY_API_KEY,
+    secretKey: process.env.IYZIPAY_SECRET_KEY,
+    uri: process.env.IYZIPAY_URI,
+  },
+
   passwordHashingParams: {
     type: argon2.argon2id,
     saltLength: 16,

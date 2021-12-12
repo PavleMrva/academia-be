@@ -3,10 +3,10 @@ const {CoursesModel, CourseCategoriesModel, CourseLanguagesModel} = require('../
 const findCourseSchema = {
   courseId: {
     custom: {
-      in: ['params'],
+      in: ['params', 'body'],
       options: async (value) => {
-        const lecture = await CoursesModel.findOne({where: {id: value}});
-        if (!lecture) {
+        const course = await CoursesModel.findOne({where: {id: value}});
+        if (!course) {
           throw new CoursesModel.Errors.CourseNotFoundById(value);
         }
       },

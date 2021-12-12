@@ -9,6 +9,11 @@ const getAllCourses = async (req, res) => {
 const getCourse = async (req, res) => {
   const {courseId} = req.params;
   const course = await coursesService.getCourseById(courseId);
+
+  if (!course) {
+    return res.notFound();
+  }
+
   return res.success(course);
 };
 

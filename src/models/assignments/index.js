@@ -1,5 +1,9 @@
 module.exports = (sequelize, DataTypes) => {
   const Assignment = sequelize.define('assignment', {
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     description: {
       type: DataTypes.TEXT,
       allowNull: false,

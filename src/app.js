@@ -8,7 +8,12 @@ const app = express();
 // Catch errors thrown in async functions
 require('express-async-errors');
 
-const {usersAPI, coursesAPI, lecturesAPI} = require('./routes');
+const {
+  assignmentsAPI,
+  usersAPI,
+  coursesAPI,
+  lecturesAPI,
+} = require('./routes');
 
 app
   .use(express.urlencoded({extended: false}))
@@ -32,7 +37,7 @@ if (config.dev) {
 app.use(passport.initialize());
 require('./middleware/passport')();
 
-// app.use('/api/v1/assignments', );
+app.use('/api/v1/assignments' );
 app.use('/api/v1/courses', coursesAPI);
 app.use('/api/v1/lectures', lecturesAPI);
 // app.use('/api/v1/subscriptions', );
