@@ -1,0 +1,1019 @@
+{
+	"info": {
+		"_postman_id": "8e7dfeec-6299-4082-9b6c-b0e2386022a6",
+		"name": "Academia",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Courses",
+			"item": [
+				{
+					"name": "Course Categories",
+					"item": [
+						{
+							"name": "Add Course Category",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "206bf677-ccaf-4238-b90e-6ad256f6f6e2",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"categoryName\": \"Acting\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{academia_api_url}}/api/v1/courseCategories",
+									"host": [
+										"{{academia_api_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"courseCategories"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Course Categories",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "206bf677-ccaf-4238-b90e-6ad256f6f6e2",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{academia_api_url}}/api/v1/courseCategories",
+									"host": [
+										"{{academia_api_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"courseCategories"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Course Category",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "206bf677-ccaf-4238-b90e-6ad256f6f6e2",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"categoryName\": \"Actingg\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{academia_api_url}}/api/v1/courseCategories/1",
+									"host": [
+										"{{academia_api_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"courseCategories",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Course Category",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "206bf677-ccaf-4238-b90e-6ad256f6f6e2",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"categoryName\": \"Actingg\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{academia_api_url}}/api/v1/courseCategories/1",
+									"host": [
+										"{{academia_api_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"courseCategories",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Course Languages",
+					"item": [
+						{
+							"name": "Add Course Language",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "206bf677-ccaf-4238-b90e-6ad256f6f6e2",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"languageName\": \"English\",\r\n    \"languageCode\": \"en\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{academia_api_url}}/api/v1/courseLanguages",
+									"host": [
+										"{{academia_api_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"courseLanguages"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Course Categories",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "206bf677-ccaf-4238-b90e-6ad256f6f6e2",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{academia_api_url}}/api/v1/courseLanguages",
+									"host": [
+										"{{academia_api_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"courseLanguages"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Course Language",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "206bf677-ccaf-4238-b90e-6ad256f6f6e2",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"languageName\": \"Spanish\",\r\n    \"languageCode\": \"es\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{academia_api_url}}/api/v1/courseLanguages/1",
+									"host": [
+										"{{academia_api_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"courseLanguages",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Course Language",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "206bf677-ccaf-4238-b90e-6ad256f6f6e2",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"categoryName\": \"Actingg\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{academia_api_url}}/api/v1/courseLanguages/1",
+									"host": [
+										"{{academia_api_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"courseLanguages",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Create Course",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "206bf677-ccaf-4238-b90e-6ad256f6f6e2",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Course 1\",\r\n    \"description\": \"Lol1\",\r\n    \"type\": \"course\",\r\n    \"categoryId\": 1,\r\n    \"languageId\": 1,\r\n    \"coursePrices\": [\r\n        {\r\n            \"price\": 20,\r\n            \"currency\": \"EUR\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{academia_api_url}}/api/v1/courses",
+							"host": [
+								"{{academia_api_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"courses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Course By ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "206bf677-ccaf-4238-b90e-6ad256f6f6e2",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{academia_api_url}}/api/v1/courses/1",
+							"host": [
+								"{{academia_api_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"courses",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Course Price",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "206bf677-ccaf-4238-b90e-6ad256f6f6e2",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"coursePrice\": {\r\n        \"price\": 10,\r\n        \"currency\": \"GBP\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{academia_api_url}}/api/v1/courses/1/price",
+							"host": [
+								"{{academia_api_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"courses",
+								"1",
+								"price"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Course",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "206bf677-ccaf-4238-b90e-6ad256f6f6e2",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Course 1.1\",\r\n    \"description\": \"Lol\",\r\n    \"type\": \"custom\",\r\n    \"categoryId\": 1,\r\n    \"languageId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{academia_api_url}}/api/v1/courses/1",
+							"host": [
+								"{{academia_api_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"courses",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Course",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "206bf677-ccaf-4238-b90e-6ad256f6f6e2",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{academia_api_url}}/api/v1/courses/1",
+							"host": [
+								"{{academia_api_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"courses",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All courses",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "206bf677-ccaf-4238-b90e-6ad256f6f6e2",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{academia_api_url}}/api/v1/courses?perPage=5&pageNum=1",
+							"host": [
+								"{{academia_api_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"courses"
+							],
+							"query": [
+								{
+									"key": "perPage",
+									"value": "5"
+								},
+								{
+									"key": "pageNum",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Lectures",
+			"item": [
+				{
+					"name": "Delete Lecture Material",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "206bf677-ccaf-4238-b90e-6ad256f6f6e2",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fileNames\": [\"1636998249623-Rick-and-Morty-Season-4-Episode-7.png\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{academia_api_url}}/api/v1/lectures/:lectureId/material",
+							"host": [
+								"{{academia_api_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"lectures",
+								":lectureId",
+								"material"
+							],
+							"variable": [
+								{
+									"key": "lectureId",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Lecture",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "206bf677-ccaf-4238-b90e-6ad256f6f6e2",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "teacherId",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "Lecture 3",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "desc",
+									"type": "text"
+								},
+								{
+									"key": "material",
+									"type": "file",
+									"src": "/C:/Users/pavle/OneDrive/Pictures/AAAABQZ2vhLs83v1NzZ6iDRXCHiSOxzqqdu-ep7uhmRv8KhpcEaVIRMngF5TqOsn_u4bfw0C_Eeu_DQmF8RPWkk8ruCV4lOi.jpg"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{academia_api_url}}/api/v1/lectures",
+							"host": [
+								"{{academia_api_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"lectures"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Lecture By Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "206bf677-ccaf-4238-b90e-6ad256f6f6e2",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{academia_api_url}}/api/v1/lectures/:lectureId",
+							"host": [
+								"{{academia_api_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"lectures",
+								":lectureId"
+							],
+							"variable": [
+								{
+									"key": "lectureId",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Lecture By Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "206bf677-ccaf-4238-b90e-6ad256f6f6e2",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Titex\",\r\n    \"description\": \"Jovanka Broz\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{academia_api_url}}/api/v1/lectures/4",
+							"host": [
+								"{{academia_api_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"lectures",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Lecture Material",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "206bf677-ccaf-4238-b90e-6ad256f6f6e2",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "material",
+									"type": "file",
+									"src": "/C:/Users/pavle/OneDrive/Pictures/19537_en_1.jfif"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{academia_api_url}}/api/v1/lectures/:lectureId/material",
+							"host": [
+								"{{academia_api_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"lectures",
+								":lectureId",
+								"material"
+							],
+							"variable": [
+								{
+									"key": "lectureId",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Lecture Material",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "206bf677-ccaf-4238-b90e-6ad256f6f6e2",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{academia_api_url}}/api/v1/lectures/:lectureId/material/:fileName",
+							"host": [
+								"{{academia_api_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"lectures",
+								":lectureId",
+								"material",
+								":fileName"
+							],
+							"variable": [
+								{
+									"key": "lectureId",
+									"value": "5"
+								},
+								{
+									"key": "fileName",
+									"value": "1636998363890-Capture.PNG"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Auth",
+					"item": [
+						{
+							"name": "Login",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "206bf677-ccaf-4238-b90e-6ad256f6f6e2",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"PavleMrvaA\",\r\n    \"password\": \"Password1!\",\r\n    \"type\": \"student\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{academia_api_url}}/api/v1/users/login",
+									"host": [
+										"{{academia_api_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"users",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Register",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"PavleMrva1\",\r\n    \"email\": \"pavlemrvaljevic1+1@gmail.com\",\r\n    \"password\": \"Password1!\",\r\n    \"gender\": \"M\",\r\n    \"firstName\": \"Pavle\",\r\n    \"lastName\": \"Mrvaljevic\",\r\n    \"phone\": \"+38267481433\",\r\n    \"city\": \"Podgorica\",\r\n    \"country\": \"Montenegro\",\r\n    \"address\": \"Zmaj Jovina 285\",\r\n    \"zipCode\": \"81000\",\r\n    \"type\": \"student\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{academia_api_url}}/api/v1/users/register",
+									"host": [
+										"{{academia_api_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"users",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Facebook Login",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "206bf677-ccaf-4238-b90e-6ad256f6f6e2",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"access_token\": \"EAAOIqyL6c7MBAO2a7ectvzZCtECXuZBJBANZBf6En0Yfg8ZAeFZC1HTPHu4a27IoHTEEeJpT6suuI2VbSZBN38rY6UtZBgALWaIQyen0AQnYs8ZA9EJaUIvrxZBEqK3FSTCPNn5FJwWPCw39OPkTFIMFwOYfEq5T3J9gYE5YSt3iBeuy86ghDvI7CViMZBjsm2a290pgN8f40KgGyAgLZCslIGi\",\r\n    \"type\": \"student\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{academia_api_url}}/api/v1/users/auth/facebook",
+									"host": [
+										"{{academia_api_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"users",
+										"auth",
+										"facebook"
+									],
+									"query": [
+										{
+											"key": "access_token",
+											"value": "",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Logout",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "206bf677-ccaf-4238-b90e-6ad256f6f6e2",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{academia_api_url}}/api/v1/users/logout",
+									"host": [
+										"{{academia_api_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"users",
+										"logout"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get All users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "206bf677-ccaf-4238-b90e-6ad256f6f6e2",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{academia_api_url}}/api/v1/users",
+							"host": [
+								"{{academia_api_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "academia_api_url",
+			"value": "127.0.0.1:3050"
+		}
+	]
+}

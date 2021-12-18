@@ -9,7 +9,6 @@ const {
   search: {paginationSchema},
 } = require('../../schemas');
 const coursesController = require('../../controllers/courses');
-const courseCategoriesController = require('../../controllers/courseCategories');
 const courseLanguagesController = require('../../controllers/courseLanguages');
 
 // COURSES
@@ -19,19 +18,5 @@ router.get('/:courseId', coursesController.getCourse);
 router.put('/:courseId', validate(checkSchema(saveCourseSchema)), coursesController.editCourse);
 router.patch('/:courseId/price', validate(checkSchema(findCourseSchema)), coursesController.addPrice);
 router.delete('/:courseId', validate(checkSchema(findCourseSchema)), coursesController.removeCourse);
-
-// COURSE CATEGORIES
-router.get('/categories', courseCategoriesController.getAllCategories);
-router.post('/categories', courseCategoriesController.addCategory);
-router.get('/categories/:categoryId', courseCategoriesController.getCategory);
-router.put('/categories/:categoryId', courseCategoriesController.editCategory);
-router.delete('/categories/:categoryId', courseCategoriesController.removeCategory);
-
-// COURSE LANGUAGES
-router.get('/languages', courseLanguagesController.getAllLanguages);
-router.post('/languages', courseLanguagesController.addLanguage);
-router.get('/languages/:languageId', courseLanguagesController.getLanguage);
-router.put('/languages/:languageId', courseLanguagesController.editLanguage);
-router.delete('/languages/:languageId', courseLanguagesController.removeLanguage);
 
 module.exports = router;

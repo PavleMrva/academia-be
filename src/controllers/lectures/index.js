@@ -2,6 +2,27 @@ const lecturesService = require('../../services/lectures');
 const {S3} = require('../../external');
 const {Readable} = require('stream');
 
+// Helper functions ->
+// DRY principle
+const addFiles = async (material) => {
+  const files = [];
+  if (Array.isArray(material)) {
+    await Promise.map(material, async ({name, data, mimetype}) => {
+      const fileName = `${Date.now().toString()}-${name}`;
+      const fileStream = Readable.from(data);
+      await S3.uploadStream(fileName, fileStream, mimetype);
+      files.push({name: fileName, type: mimetype});
+    });
+  } else {
+    const fileName = `${Date.now().toString()}-${material.name}`;
+    const fileStream = Readable.from(material.data);
+    await S3.uploadStream(fileName, fileStream, material.mimetype);
+    files.push({name: fileName, type: material.mimetype});
+  }
+  return files;
+};
+// <- Helper functions
+
 const getAllLectures = async (req, res) => {
   const {name, perPage, pageNum} = req.query;
   const lectures = await lecturesService.getAllLectures(perPage, pageNum, name);
@@ -16,14 +37,8 @@ const getLecture = async (req, res) => {
 
 const addLecture = async (req, res) => {
   const {teacherId, title, description} = req.body;
-  const {material} = req.files;
-  const files = [];
-  await Promise.map(material, async ({name, data, mimetype}) => {
-    const fileName = `${Date.now().toString()}-${name}`;
-    const fileStream = Readable.from(data);
-    await S3.uploadStream(fileName, fileStream, mimetype);
-    files.push({name: fileName, type: mimetype});
-  });
+  const {material} = req.files || [req.file];
+  const files = await addFiles(material);
 
   const lecture = await lecturesService.createLecture(teacherId, title, description, files);
   return res.success(lecture);
@@ -39,13 +54,7 @@ const editLecture = async (req, res) => {
 const addLectureMaterial = async (req, res) => {
   const {lectureId} = req.params;
   const {material} = req.files;
-  const files = [];
-  await Promise.map(material, async ({name, data, mimetype}) => {
-    const fileName = `${Date.now().toString()}-${name}`;
-    const fileStream = Readable.from(data);
-    await S3.uploadStream(fileName, fileStream, mimetype);
-    files.push({name: fileName, type: mimetype});
-  });
+  const files = await addFiles(material);
 
   const lecture = await lecturesService.addLectureMaterial(lectureId, files);
   return res.success(lecture);

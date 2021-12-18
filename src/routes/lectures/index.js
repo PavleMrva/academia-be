@@ -23,7 +23,7 @@ router.post('/', validate(checkSchema(saveLectureSchema)), lecturesController.ad
 router.get('/:lectureId', lecturesController.getLecture);
 router.put('/:lectureId', validate(checkSchema(saveLectureSchema)), lecturesController.editLecture);
 
-router.get('/:lectureId/material', validate(checkSchema(getLectureMaterialSchema)), lecturesController.getLectureMaterial);
+router.get('/:lectureId/material/:fileName', validate(checkSchema(getLectureMaterialSchema)), lecturesController.getLectureMaterial);
 router.patch('/:lectureId/material', validate(checkSchema(addLectureMaterialSchema)), lecturesController.addLectureMaterial);
 router.delete('/:lectureId/material', validate(checkSchema(removeLectureMaterialSchema)), lecturesController.removeLectureMaterial);
 

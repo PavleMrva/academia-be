@@ -10,9 +10,11 @@ require('express-async-errors');
 
 const {
   assignmentsAPI,
-  usersAPI,
   coursesAPI,
+  courseCategoriesAPI,
+  courseLanguagesAPI,
   lecturesAPI,
+  usersAPI,
 } = require('./routes');
 
 app
@@ -37,8 +39,10 @@ if (config.dev) {
 app.use(passport.initialize());
 require('./middleware/passport')();
 
-app.use('/api/v1/assignments' );
+app.use('/api/v1/assignments', assignmentsAPI);
 app.use('/api/v1/courses', coursesAPI);
+app.use('/api/v1/courseCategories', courseCategoriesAPI);
+app.use('/api/v1/courseLanguages', courseLanguagesAPI);
 app.use('/api/v1/lectures', lecturesAPI);
 // app.use('/api/v1/subscriptions', );
 app.use('/api/v1/users', usersAPI);

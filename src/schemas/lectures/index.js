@@ -29,7 +29,7 @@ const addLectureMaterialSchema = {
   ...findLectureSchema,
   material: {
     notEmpty: true,
-    isArray: true,
+    in: ['files'],
     errorMessage: 'Lecture material missing',
   },
 };
@@ -60,7 +60,7 @@ const getLectureMaterialSchema = {
     custom: {
       options: async (value, {req}) => {
         const {lectureId} = req.params;
-        const file = await LectureMaterialsModel.findOne({where: {value, lectureId}});
+        const file = await LectureMaterialsModel.findOne({where: {fileName: value, lectureId}});
         if (!file) {
           throw new LectureMaterialsModel.Errors.FileNotFoundByName(value, lectureId);
         }
