@@ -14,6 +14,7 @@ const {
   courseCategoriesAPI,
   courseLanguagesAPI,
   lecturesAPI,
+  subscriptionsAPI,
   usersAPI,
 } = require('./routes');
 
@@ -44,7 +45,7 @@ app.use('/api/v1/courses', coursesAPI);
 app.use('/api/v1/courseCategories', courseCategoriesAPI);
 app.use('/api/v1/courseLanguages', courseLanguagesAPI);
 app.use('/api/v1/lectures', lecturesAPI);
-// app.use('/api/v1/subscriptions', );
+app.use('/api/v1/subscriptions', subscriptionsAPI);
 app.use('/api/v1/users', usersAPI);
 app.get('/api/v1/ping', (req, res) => {
   res.success({pong: true});

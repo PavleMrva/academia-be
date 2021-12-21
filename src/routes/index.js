@@ -1,9 +1,10 @@
 const assignmentsAPI = require('./assignments');
-const usersAPI = require('./users');
 const coursesAPI = require('./courses');
 const courseCategoriesAPI = require('./courseCategories');
 const courseLanguagesAPI = require('./courseLanguages');
 const lecturesAPI = require('./lectures');
+const subscriptionsAPI = require('./subscriptions');
+const usersAPI = require('./users');
 
 module.exports = {
   assignmentsAPI,
@@ -11,5 +12,6 @@ module.exports = {
   courseCategoriesAPI,
   courseLanguagesAPI,
   lecturesAPI,
+  subscriptionsAPI,
   usersAPI,
 };

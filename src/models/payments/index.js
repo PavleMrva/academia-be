@@ -1,5 +1,6 @@
 const {v4: uuid} = require('uuid');
 const errors = require('./errors');
+const Iyzipay = require('iyzipay');
 
 module.exports = (sequelize, DataTypes) => {
   const Payment = sequelize.define('payment', {
@@ -34,12 +35,12 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
     currency: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
       validate: {
         isIn: {
-          args: [[1, 2, 3, 4, 5]],
-          msg: 'Rating can be between 1 and 5',
+          args: [Object.values(Iyzipay.CURRENCY)],
+          msg: `Currency must be one of the following ${Object.values(Iyzipay.CURRENCY)}`,
         },
       },
     },
