@@ -49,6 +49,8 @@ module.exports = (sequelize, DataTypes) => {
     underscored: true,
   });
 
+  Payment.Errors = errors;
+
   Payment.associate = ({SubscriptionsModel}) => {
     Payment.hasOne(SubscriptionsModel);
   };

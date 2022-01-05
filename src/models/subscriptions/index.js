@@ -8,11 +8,10 @@ module.exports = (sequelize, DataTypes) => {
     },
     subscriptionEndDate: {
       type: DataTypes.DATE,
-      allowNull: false,
       validate: {
         isGreaterThanStartDate(value) {
           if (value.getTime() > this.subscribtionStartDate) {
-            throw new errors.SubcriptionEndDateInvalid();
+            throw new errors.SubscriptionEndDateInvalid();
           }
         },
       },
@@ -21,6 +20,8 @@ module.exports = (sequelize, DataTypes) => {
     // Other model options go here
     underscored: true,
   });
+
+  Subscription.Errors = errors;
 
   Subscription.associate = ({
     CoursesModel,

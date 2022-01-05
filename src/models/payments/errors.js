@@ -14,7 +14,15 @@ class ReceiptNumberNotUUID extends BaseError {
   }
 }
 
+class PaymentNotFound extends BaseError {
+  constructor(id) {
+    super(404, 'payment_not_found',
+      `Payment with id ${id} not found`);
+  }
+}
+
 module.exports = {
   AmountIsNotGreaterThanZero,
   ReceiptNumberNotUUID,
+  PaymentNotFound,
 };

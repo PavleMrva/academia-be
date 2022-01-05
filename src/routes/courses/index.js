@@ -9,7 +9,6 @@ const {
   search: {paginationSchema},
 } = require('../../schemas');
 const coursesController = require('../../controllers/courses');
-const courseLanguagesController = require('../../controllers/courseLanguages');
 
 // COURSES
 router.get('/', validate(checkSchema(paginationSchema)), coursesController.getAllCourses);
