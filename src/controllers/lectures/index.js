@@ -1,27 +1,6 @@
 const lecturesService = require('../../services/lectures');
 const {S3} = require('../../external');
-const {Readable} = require('stream');
-
-// Helper functions ->
-// DRY principle
-const addFiles = async (material) => {
-  const files = [];
-  if (Array.isArray(material)) {
-    await Promise.map(material, async ({name, data, mimetype}) => {
-      const fileName = `${Date.now().toString()}-${name}`;
-      const fileStream = Readable.from(data);
-      await S3.uploadStream(fileName, fileStream, mimetype);
-      files.push({name: fileName, type: mimetype});
-    });
-  } else {
-    const fileName = `${Date.now().toString()}-${material.name}`;
-    const fileStream = Readable.from(material.data);
-    await S3.uploadStream(fileName, fileStream, material.mimetype);
-    files.push({name: fileName, type: material.mimetype});
-  }
-  return files;
-};
-// <- Helper functions
+const {addFiles} = require('../../common');
 
 const getAllLectures = async (req, res) => {
   const {name, perPage, pageNum} = req.query;

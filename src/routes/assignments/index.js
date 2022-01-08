@@ -16,4 +16,11 @@ router.post('/', validate(checkSchema(saveAssignmentSchema)), assignmentsControl
 router.put('/:assignmentId', validate(checkSchema(saveAssignmentSchema)), assignmentsController.editAssignment);
 router.delete('/:assignmentId', validate(checkSchema(findAssignmentSchema)), assignmentsController.removeAssignment);
 
+// ASSIGNMENT SUBMISSIONS
+router.get('/submission/:assignmentId', assignmentsController.getAssignmentSubmission);
+
+// For Teachers (update grade and feedback)
+router.patch('/submission/:assignmentId', assignmentsController.updateAssignmentSubmission);
+router.post('/submission/:assignmentId', assignmentsController.submitAssignment);
+
 module.exports = router;

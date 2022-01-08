@@ -1,3 +1,4 @@
+const errors = require('./errors');
 const ZIP_CODE_REGEX = new RegExp(/^\d{5}[-\s]?(?:\d{4})?$/gm);
 
 module.exports = (sequelize, DataTypes) => {
@@ -37,6 +38,8 @@ module.exports = (sequelize, DataTypes) => {
     // Other model options go here
     underscored: true,
   });
+
+  Student.Errors = errors;
 
   Student.associate = ({
     UsersModel,
