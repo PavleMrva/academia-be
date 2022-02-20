@@ -3,6 +3,7 @@ const coursesAPI = require('./courses');
 const courseCategoriesAPI = require('./courseCategories');
 const courseLanguagesAPI = require('./courseLanguages');
 const lecturesAPI = require('./lectures');
+const paymentsAPI = require('./payments');
 const subscriptionsAPI = require('./subscriptions');
 const usersAPI = require('./users');
 
@@ -12,6 +13,7 @@ module.exports = {
   courseCategoriesAPI,
   courseLanguagesAPI,
   lecturesAPI,
+  paymentsAPI,
   subscriptionsAPI,
   usersAPI,
 };

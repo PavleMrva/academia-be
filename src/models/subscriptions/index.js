@@ -1,4 +1,5 @@
 const errors = require('./errors');
+const Iyzipay = require('iyzipay');
 
 module.exports = (sequelize, DataTypes) => {
   const Subscription = sequelize.define('subscription', {
@@ -6,13 +7,13 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATE,
       allowNull: false,
     },
-    subscriptionEndDate: {
-      type: DataTypes.DATE,
+    subscriptionStatus: {
+      type: DataTypes.STRING,
+      allowNull: false,
       validate: {
-        isGreaterThanStartDate(value) {
-          if (value.getTime() > this.subscribtionStartDate) {
-            throw new errors.SubscriptionEndDateInvalid();
-          }
+        isIn: {
+          args: [Object.values(Iyzipay.SUBSCRIPTION_STATUS)],
+          msg: `Subscription status must be one of the following ${Object.values(Iyzipay.SUBSCRIPTION_STATUS)}`,
         },
       },
     },

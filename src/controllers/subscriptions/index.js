@@ -1,6 +1,5 @@
 const subscriptionsService = require('../../services/subscriptions');
 
-
 const getUserSubscriptions = async (req, res) => {
   const {user: {userId}} = req;
   const subscriptions = subscriptionsService.getUserSubscriptions(userId);
@@ -18,7 +17,7 @@ const subscribeToCourse = async (req, res) => {
   const {paymentId} = req.body;
 
   if (!paymentId) {
-    return res.missingParams();
+    return res.missingParams(['paymentId']);
   }
 
   await subscriptionsService.subscribeToCourse(userId, courseId, paymentId);

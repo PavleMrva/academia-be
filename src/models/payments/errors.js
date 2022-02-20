@@ -21,8 +21,16 @@ class PaymentNotFound extends BaseError {
   }
 }
 
+class PaymentCannotBeCanceled extends BaseError {
+  constructor(id) {
+    super(422, 'payment_cannot_be_canceled',
+      `Payment with id ${id} cannot be canceled`);
+  }
+}
+
 module.exports = {
   AmountIsNotGreaterThanZero,
   ReceiptNumberNotUUID,
   PaymentNotFound,
+  PaymentCannotBeCanceled,
 };

@@ -1,20 +1,7 @@
-const {validate: uuidValidate} = require('uuid');
 const errors = require('./errors');
 
 module.exports = (sequelize, DataTypes) => {
   const Course = sequelize.define('course', {
-    // guid: {
-    //   // Used as unique identifier for the course independent from language
-    //   type: DataTypes.STRING,
-    //   allowNull: false,
-    //   validate: {
-    //     isUUID(value) {
-    //       if (!uuidValidate(value)) {
-    //         throw new errors.CourseGlobalIDNotUUID();
-    //       }
-    //     },
-    //   },
-    // },
     name: {
       type: DataTypes.STRING,
       allowNull: false,

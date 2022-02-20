@@ -15,20 +15,12 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
     },
-    receiptNumber: {
+    paymentId: {
       type: DataTypes.STRING,
       allowNull: false,
-      validate: {
-        isUUID(value) {
-          if (uuid.validate(value)) {
-            throw new errors.ReceiptNumberNotUUID();
-          }
-        },
-      },
     },
     paymentDate: {
       type: DataTypes.DATE,
-      allowNull: false,
     },
     isPaid: {
       type: DataTypes.BOOLEAN,

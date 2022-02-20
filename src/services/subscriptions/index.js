@@ -2,13 +2,30 @@ const {
   CoursesModel,
   PaymentsModel,
   SubscriptionsModel,
+  StudentsModel,
 } = require('../../models');
 
 const getUserSubscriptions = async (userId) => {
-  return await SubscriptionsModel.findAll({where: {userId, subscriptionEndDate: null}});
+  const student = await StudentsModel.findOne({
+    where: {userId},
+  });
+
+  if (!student) {
+    throw new StudentsModel.Errors.StudentWithUserIdNotFound(userId);
+  }
+
+  return await SubscriptionsModel.findAll({where: {studentId: student.id, subscriptionEndDate: null}});
 };
 
 const subscribeToCourse = async (userId, courseId, paymentId) => {
+  const student = await StudentsModel.findOne({
+    where: {userId},
+  });
+
+  if (!student) {
+    throw new StudentsModel.Errors.StudentWithUserIdNotFound(userId);
+  }
+
   const course = await CoursesModel.findOne({where: {id: courseId}});
 
   if (!course) {
@@ -24,18 +41,25 @@ const subscribeToCourse = async (userId, courseId, paymentId) => {
   await SubscriptionsModel.create({
     subscriptionStartDate: Date.now(),
     subscriptionEndDate: null,
-    userId,
+    studentId: student.id,
     courseId,
     paymentId,
   });
 };
 
 const unsubscribeFromCourse = async (userId, courseId) => {
+  const student = await StudentsModel.findOne({
+    where: {userId},
+  });
+
+  if (!student) {
+    throw new StudentsModel.Errors.StudentWithUserIdNotFound(userId);
+  }
+
   await SubscriptionsModel.update({
     subscriptionEndDate: Date.now(),
-    userId,
     courseId,
-  }, {where: {userId, courseId}});
+  }, {where: {studentId: student.id, courseId}});
 };
 
 module.exports = {
