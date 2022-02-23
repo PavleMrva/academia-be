@@ -68,6 +68,39 @@ const removeLecture = async (req, res) => {
   return res.success();
 };
 
+const getLectureComments = async (req, res) => {
+  const {lectureId} = req.params;
+  const comments = await lecturesService.getLectureComments(lectureId);
+  return res.success(comments);
+};
+
+const getLectureComment = async (req, res) => {
+  const {lectureId, commentId} = req.params;
+  const comment = await lecturesService.getLectureComment(lectureId, commentId);
+  return res.success(comment);
+};
+
+const addLectureComment = async (req, res) => {
+  const {user: {userId}} = req;
+  const {lectureId} = req.params;
+  const {content} = req.body;
+
+  if (!content || !content.length) {
+    return res.missingParams(['content']);
+  }
+
+  await lecturesService.addLectureComment(lectureId, userId);
+  return res.success();
+};
+
+const deleteLectureComment = async (req, res) => {
+  const {user: {userId}} = req;
+  const {commentId} = req.params;
+  await lecturesService.deleteLectureComment(userId, commentId);
+  return res.success();
+};
+
+
 module.exports = {
   getAllLectures,
   getLecture,
@@ -78,4 +111,8 @@ module.exports = {
   removeLectureMaterial,
   removeLecture,
   getLectureMaterial,
+  getLectureComments,
+  getLectureComment,
+  addLectureComment,
+  deleteLectureComment,
 };

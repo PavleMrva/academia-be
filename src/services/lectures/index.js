@@ -3,6 +3,7 @@ const {
   Sequelize: {Op},
   LecturesModel,
   LectureMaterialsModel,
+  LectureCommentsModel,
   CourseLecturesModel,
 } = require('../../models');
 
@@ -115,6 +116,44 @@ const getLectureMaterial = (lectureId, lectureMaterialId) => {
   });
 };
 
+const getLectureComments = async (lectureId) => {
+  return await LectureCommentsModel.findAll({
+    where: {lectureId},
+  });
+};
+
+const getLectureComment = async (lectureId, commentId) => {
+  const comment = await LectureCommentsModel.findOne({
+    where: {id: commentId, lectureId},
+  });
+
+  if (!comment) {
+    throw new LectureCommentsModel.Errors.CommentNotFound(commentId);
+  }
+
+  return comment;
+};
+
+const addLectureComment = async (userId, lectureId, content) => {
+  return await LectureCommentsModel.create({
+    userId, lectureId, content,
+  });
+};
+
+const deleteLectureComment = async (userId, commentId) => {
+  const comment = await LectureCommentsModel.findOne({
+    where: {id: commentId},
+  });
+
+  if (!comment) {
+    throw new LectureCommentsModel.Errors.CommentNotFound(commentId);
+  }
+
+  return await LectureCommentsModel.update({deleted: true}, {
+    where: {id: commentId, userId},
+  });
+};
+
 module.exports = {
   getAllLectures,
   getLectureById,
@@ -125,4 +164,8 @@ module.exports = {
   addLectureToCourse,
   deleteLecture,
   getLectureMaterial,
+  getLectureComments,
+  getLectureComment,
+  addLectureComment,
+  deleteLectureComment,
 };

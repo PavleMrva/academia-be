@@ -102,7 +102,7 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
-  User.associate = ({StudentsModel, TeachersModel, AdminsModel}) => {
+  User.associate = ({StudentsModel, TeachersModel, AdminsModel, LectureCommentsModel}) => {
     User.hasOne(StudentsModel, {
       onDelete: 'CASCADE',
       foreignKey: {
@@ -124,6 +124,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
     });
+    User.hasMany(LectureCommentsModel, {as: 'lecture_comments', onDelete: 'cascade'});
   };
 
   User.Errors = errors;

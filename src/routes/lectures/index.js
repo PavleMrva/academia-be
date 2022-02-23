@@ -27,6 +27,11 @@ router.get('/:lectureId/material/:fileName', validate(checkSchema(getLectureMate
 router.patch('/:lectureId/material', validate(checkSchema(addLectureMaterialSchema)), lecturesController.addLectureMaterial);
 router.delete('/:lectureId/material', validate(checkSchema(removeLectureMaterialSchema)), lecturesController.removeLectureMaterial);
 
+router.get('/:lectureId/comments', lecturesController.getLectureComments);
+router.get('/:lectureId/comments/:commentId', lecturesController.getLectureComment);
+router.post('/:lectureId/comments', lecturesController.addLectureComment);
+router.delete('/:lectureId/comments', lecturesController.deleteLectureComment);
+
 router.patch('/:lectureId/course/:courseId', validate(checkSchema({...findLectureSchema, ...findCourseSchema})), lecturesController.addLectureToCourse);
 router.delete('/:lectureId', validate(checkSchema(findLectureSchema)), lecturesController.removeLecture);
 

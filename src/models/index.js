@@ -16,6 +16,7 @@ const models = {
   CourseLecturesModel: require('./courseLectures')(sequelize, DataTypes),
   CoursePricesModel: require('./coursePrices')(sequelize, DataTypes),
   CoursesModel: require('./courses')(sequelize, DataTypes),
+  LectureCommentsModel: require('./lectureComments')(sequelize, DataTypes),
   LectureMaterialsModel: require('./lectureMaterials')(sequelize, DataTypes),
   LecturesModel: require('./lectures')(sequelize, DataTypes),
   PaymentsModel: require('./payments')(sequelize, DataTypes),
