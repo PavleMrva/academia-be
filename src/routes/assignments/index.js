@@ -10,9 +10,9 @@ const {
 } = require('../../schemas');
 const assignmentsController = require('../../controllers/assignments');
 
+router.post('/', validate(checkSchema(saveAssignmentSchema)), assignmentsController.addAssignment);
 router.get('/:courseId', validate(checkSchema(paginationSchema)), assignmentsController.getAssignmentsByCourseId);
 router.get('/:assignmentId', assignmentsController.getAssignment);
-router.post('/', validate(checkSchema(saveAssignmentSchema)), assignmentsController.addAssignment);
 router.put('/:assignmentId', validate(checkSchema(saveAssignmentSchema)), assignmentsController.editAssignment);
 router.delete('/:assignmentId', validate(checkSchema(findAssignmentSchema)), assignmentsController.removeAssignment);
 
@@ -21,6 +21,8 @@ router.get('/submission/:assignmentId', assignmentsController.getAssignmentSubmi
 
 // For Teachers (update grade and feedback)
 router.patch('/submission/:assignmentId', assignmentsController.updateAssignmentSubmission);
+
+// For Students
 router.post('/submission/:assignmentId', assignmentsController.submitAssignment);
 
 module.exports = router;

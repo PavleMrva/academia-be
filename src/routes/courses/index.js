@@ -15,7 +15,7 @@ router.get('/', validate(checkSchema(paginationSchema)), coursesController.getAl
 router.post('/', validate(checkSchema(saveCourseSchema)), coursesController.addCourse);
 router.get('/:courseId', coursesController.getCourse);
 router.put('/:courseId', validate(checkSchema(saveCourseSchema)), coursesController.editCourse);
-router.patch('/:courseId/price', validate(checkSchema(findCourseSchema)), coursesController.addPrice);
 router.delete('/:courseId', validate(checkSchema(findCourseSchema)), coursesController.removeCourse);
+router.patch('/:courseId/price', validate(checkSchema(findCourseSchema)), coursesController.addPrice);
 
 module.exports = router;

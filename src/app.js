@@ -40,11 +40,12 @@ if (config.dev) {
 
 app.use(passport.initialize());
 require('./middleware/passport')();
+app.use(require('./middleware/authorization')());
 
 app.use('/api/v1/assignments', assignmentsAPI);
-app.use('/api/v1/courses', coursesAPI);
 app.use('/api/v1/courseCategories', courseCategoriesAPI);
 app.use('/api/v1/courseLanguages', courseLanguagesAPI);
+app.use('/api/v1/courses', coursesAPI);
 app.use('/api/v1/lectures', lecturesAPI);
 app.use('/api/v1/payments', paymentsAPI);
 app.use('/api/v1/subscriptions', subscriptionsAPI);

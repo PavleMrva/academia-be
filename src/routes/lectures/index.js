@@ -22,17 +22,17 @@ router.post('/', validate(checkSchema(saveLectureSchema)), lecturesController.ad
 
 router.get('/:lectureId', lecturesController.getLecture);
 router.put('/:lectureId', validate(checkSchema(saveLectureSchema)), lecturesController.editLecture);
+router.delete('/:lectureId', validate(checkSchema(findLectureSchema)), lecturesController.removeLecture);
 
-router.get('/:lectureId/material/:fileName', validate(checkSchema(getLectureMaterialSchema)), lecturesController.getLectureMaterial);
 router.patch('/:lectureId/material', validate(checkSchema(addLectureMaterialSchema)), lecturesController.addLectureMaterial);
 router.delete('/:lectureId/material', validate(checkSchema(removeLectureMaterialSchema)), lecturesController.removeLectureMaterial);
+router.get('/:lectureId/material/:fileName', validate(checkSchema(getLectureMaterialSchema)), lecturesController.getLectureMaterial);
 
 router.get('/:lectureId/comments', lecturesController.getLectureComments);
-router.get('/:lectureId/comments/:commentId', lecturesController.getLectureComment);
 router.post('/:lectureId/comments', lecturesController.addLectureComment);
-router.delete('/:lectureId/comments', lecturesController.deleteLectureComment);
+router.get('/:lectureId/comments/:commentId', lecturesController.getLectureComment);
+router.delete('/:lectureId/comments/:commentId', lecturesController.deleteLectureComment);
 
 router.patch('/:lectureId/course/:courseId', validate(checkSchema({...findLectureSchema, ...findCourseSchema})), lecturesController.addLectureToCourse);
-router.delete('/:lectureId', validate(checkSchema(findLectureSchema)), lecturesController.removeLecture);
 
 module.exports = router;
