@@ -45,7 +45,6 @@ module.exports = (sequelize, DataTypes) => {
   }) => {
     Course.belongsToMany(LecturesModel, {through: CourseLecturesModel});
     Course.hasMany(StudentCourseDetailsModel, {onDelete: 'cascade'});
-    Course.hasMany(AssignmentsModel, {onDelete: 'cascade'});
     Course.hasMany(SubscriptionsModel, {onDelete: 'cascade'});
     Course.hasMany(CoursePricesModel, {onDelete: 'cascade'});
     Course.belongsTo(CourseCategoriesModel, {foreignKey: {allowNull: false}});

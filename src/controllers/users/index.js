@@ -8,7 +8,7 @@ const getAllUsers = async (req, res) => {
 };
 
 const login = async (req, res, next) => {
-  const user = req.user;
+  const {user} = req;
   await usersService.authenticate(user.username);
 
   const {

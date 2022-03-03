@@ -3,7 +3,7 @@ const {LectureMaterialsModel, LecturesModel} = require('../../models');
 const findLectureSchema = {
   lectureId: {
     custom: {
-      in: ['params'],
+      in: ['params', 'body'],
       options: async (value) => {
         const lecture = await LecturesModel.findOne({where: {id: value}});
         if (!lecture) {

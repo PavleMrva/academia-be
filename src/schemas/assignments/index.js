@@ -1,5 +1,5 @@
 const {AssignmentsModel} = require('../../models');
-const {findCourseSchema} = require('../courses');
+const {findLectureSchema} = require('../lectures');
 
 const findAssignmentSchema = {
   assignmentId: {
@@ -16,7 +16,7 @@ const findAssignmentSchema = {
 };
 
 const saveAssignmentSchema = {
-  ...findCourseSchema,
+  ...findLectureSchema,
   title: {
     notEmpty: true,
     errorMessage: 'Assignment title missing',

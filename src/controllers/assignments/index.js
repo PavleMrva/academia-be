@@ -12,9 +12,9 @@ const getAssignment = async (req, res) => {
   return res.success(assignment);
 };
 
-const getAssignmentsByCourseId = async (req, res) => {
-  const {courseId} = req.params;
-  const assignments = await assignmentsService.getAssignmentsByCourseId(courseId);
+const getAssignmentsByLectureId = async (req, res) => {
+  const {lectureId} = req.params;
+  const assignments = await assignmentsService.getAssignmentsByLectureId(lectureId);
 
   if (!assignments.length) {
     return res.notFound();
@@ -24,25 +24,25 @@ const getAssignmentsByCourseId = async (req, res) => {
 };
 
 const addAssignment = async (req, res) => {
-  const {courseId, title, description, deadline} = req.body;
+  const {lectureId, title, description, deadline} = req.body;
 
-  if (!courseId || !title || !description || !deadline) {
+  if (!lectureId || !title || !description || !deadline) {
     return res.missingParams();
   }
 
-  await assignmentsService.createAssignment(courseId, title, description, deadline);
+  await assignmentsService.createAssignment(lectureId, title, description, deadline);
   return res.success();
 };
 
 const editAssignment = async (req, res) => {
   const {assignmentId} = req.params;
-  const {courseId, title, description, deadline} = req.body;
+  const {lectureId, title, description, deadline} = req.body;
 
-  if (!courseId || !description || !deadline) {
+  if (!lectureId || !description || !deadline) {
     return res.missingParams();
   }
 
-  const assignment = await assignmentsService.updateAssignment(assignmentId, courseId, title, description, deadline);
+  const assignment = await assignmentsService.updateAssignment(assignmentId, lectureId, title, description, deadline);
   return res.success(assignment);
 };
 
@@ -99,7 +99,7 @@ const submitAssignment = async (req, res) => {
 
 module.exports = {
   getAssignment,
-  getAssignmentsByCourseId,
+  getAssignmentsByLectureId,
   addAssignment,
   editAssignment,
   removeAssignment,

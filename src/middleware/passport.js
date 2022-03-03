@@ -15,7 +15,7 @@ module.exports = () => {
     try {
       const user = await UsersModel.findOne({
         where: {email},
-        attributes: [['id', 'userId'], 'username', 'email', ['first_name', 'firstName'], ['last_name', 'lastName'], 'type'],
+        attributes: [['id', 'userId'], 'username', 'email', ['first_name', 'firstName'], ['last_name', 'lastName'], 'role'],
       });
 
       if (!user) {
@@ -37,7 +37,7 @@ module.exports = () => {
     try {
       const user = await UsersModel.findOne({
         where: {email},
-        attributes: [['id', 'userId'], 'username', 'email', ['first_name', 'firstName'], ['last_name', 'lastName'], 'type'],
+        attributes: [['id', 'userId'], 'username', 'email', ['first_name', 'firstName'], ['last_name', 'lastName'], 'role'],
       });
       done(null, user);
     } catch (err) {
@@ -51,7 +51,7 @@ module.exports = () => {
       try {
         const user = await UsersModel.findOne({
           where: {username},
-          attributes: ['id', 'username', 'email', ['first_name', 'firstName'], ['last_name', 'lastName'], 'password', 'type'],
+          attributes: ['id', 'username', 'email', ['first_name', 'firstName'], ['last_name', 'lastName'], 'password', 'role'],
         });
 
         const isPasswordCorrect = await user.checkPassword(password);
@@ -65,7 +65,7 @@ module.exports = () => {
           email: user.email,
           firstName: user.firstName,
           lastName: user.lastName,
-          role: user.type,
+          role: user.role,
         });
       } catch (err) {
         done(err);

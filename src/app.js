@@ -1,6 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const passport = require('passport');
+const cookieParser = require('cookie-parser');
 const fileUpload = require('express-fileupload');
 const config = require('./config');
 const app = express();
@@ -20,6 +21,7 @@ const {
 } = require('./routes');
 
 app
+  .use(cookieParser())
   .use(express.urlencoded({extended: false}))
   .use(express.json())
   .use(fileUpload())
@@ -32,11 +34,11 @@ if (config.dev) {
 
 require('./middleware/responses')(app);
 
-if (config.dev) {
-  app.use(require('./middleware/apiKeyCheck'));
-} else {
-  app.use('/api', require('./middleware/jwtCheck'));
-}
+// if (config.dev) {
+//   app.use(require('./middleware/apiKeyCheck'));
+// } else {
+app.use('/api', require('./middleware/jwtCheck'));
+// }
 
 app.use(passport.initialize());
 require('./middleware/passport')();

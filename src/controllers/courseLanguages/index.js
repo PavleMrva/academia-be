@@ -18,8 +18,8 @@ const addLanguage = async (req, res) => {
     return res.missingParams();
   }
 
-  await courseLanguagesService.createCourseLanguage(languageName, languageCode);
-  return res.success();
+  const courseLanguage = await courseLanguagesService.createCourseLanguage(languageName, languageCode);
+  return res.success(courseLanguage);
 };
 
 const editLanguage = async (req, res) => {

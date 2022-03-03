@@ -11,18 +11,18 @@ const getAssignmentById = (assignmentId) => {
   });
 };
 
-const getAssignmentsByCourseId = (courseId) => {
+const getAssignmentsByLectureId = (lectureId) => {
   return AssignmentsModel.findAll({
-    where: {courseId, deleted: false},
+    where: {lectureId, deleted: false},
   });
 };
 
-const createAssignment = (courseId, title, description, deadline) => {
-  return AssignmentsModel.create({courseId, title, description, deadline});
+const createAssignment = (lectureId, title, description, deadline) => {
+  return AssignmentsModel.create({lectureId, title, description, deadline});
 };
 
-const updateAssignment = async (assignmentId, courseId, title, description, deadline) => {
-  await AssignmentsModel.update({courseId, title, description, deadline}, {
+const updateAssignment = async (assignmentId, lectureId, title, description, deadline) => {
+  await AssignmentsModel.update({lectureId, title, description, deadline}, {
     where: {id: assignmentId},
   });
 };
@@ -104,7 +104,7 @@ const submitAssignment = async (userId, assignmentId, files) => {
 
 module.exports = {
   getAssignmentById,
-  getAssignmentsByCourseId,
+  getAssignmentsByLectureId,
   createAssignment,
   updateAssignment,
   deleteAssignment,

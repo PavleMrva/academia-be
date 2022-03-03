@@ -81,13 +81,13 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
     },
-    type: {
+    role: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
         isIn: {
           args: [['student', 'teacher', 'admin']],
-          msg: 'Type can only be: student, teacher or admin',
+          msg: 'Role can only be: student, teacher or admin',
         },
       },
     },

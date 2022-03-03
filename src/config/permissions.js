@@ -8,7 +8,7 @@ const ALL_ROLES = Object.values(ROLES);
 const EndpointPolicies = Object.freeze({
   // Assignments
   '/api/v1/assignments': {POST: [ROLES.ADMIN, ROLES.TEACHER]},
-  '/api/v1/assignments/:courseId': {GET: ALL_ROLES},
+  '/api/v1/assignments/:lectureId': {GET: ALL_ROLES},
   '/api/v1/assignments/:assignmentId': {GET: ALL_ROLES, PUT: [ROLES.ADMIN, ROLES.TEACHER], DELETE: [ROLES.ADMIN, ROLES.TEACHER]},
   '/api/v1/assignments/submission/:assignmentId': {GET: [ROLES.ADMIN, ROLES.TEACHER], PATCH: [ROLES.ADMIN, ROLES.TEACHER], POST: ALL_ROLES},
   // Course Categories

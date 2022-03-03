@@ -11,7 +11,7 @@ const {
 const assignmentsController = require('../../controllers/assignments');
 
 router.post('/', validate(checkSchema(saveAssignmentSchema)), assignmentsController.addAssignment);
-router.get('/:courseId', validate(checkSchema(paginationSchema)), assignmentsController.getAssignmentsByCourseId);
+router.get('/:lectureId', validate(checkSchema(paginationSchema)), assignmentsController.getAssignmentsByLectureId);
 router.get('/:assignmentId', assignmentsController.getAssignment);
 router.put('/:assignmentId', validate(checkSchema(saveAssignmentSchema)), assignmentsController.editAssignment);
 router.delete('/:assignmentId', validate(checkSchema(findAssignmentSchema)), assignmentsController.removeAssignment);

@@ -7,7 +7,7 @@ module.exports = {
   prod: env === 'production',
   test: env === 'test',
 
-  version: require('../package.json').version ?? null,
+  version: require('../../package.json').version ?? null,
 
   nodePort: 3050,
   apiKey: process.env.API_KEY,

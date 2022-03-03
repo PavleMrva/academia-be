@@ -15,7 +15,8 @@ module.exports = async (req, res, next) => {
     // set HTTP cookies used for authentication
     res.cookie('refresh_token', refreshToken, {maxAge: 3600000, httpOnly: true}); // 1h
     res.cookie('access_token', accessToken, {maxAge: 1800000, httpOnly: true}); // 30min
-    req.user = jwt.decode(refreshToken);
+    const {user} = jwt.decode(refreshToken);
+    req.user = user;
     next();
   } catch (err) {
     logger.error('[jwtCheck] Invalid or not provided access or refresh tokens');

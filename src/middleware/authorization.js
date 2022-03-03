@@ -6,7 +6,7 @@ const {pathToRegexp} = require('path-to-regexp');
 module.exports = () => {
   const getLongestString = (array) => array.reduce((a, b) => a.length > b.length ? a : b);
   const regexPolicies = _.mapValues(EndpointPolicies,
-    (value, key) => ({regex: pathToRegexp(key, {end: false}), ...value}));
+    (value, key) => ({regex: pathToRegexp(key, [], {end: false}), ...value}));
 
   const getAllowedRolesForEndpoint = (endpoint) => {
     // find all policies matching endpoint
@@ -21,20 +21,27 @@ module.exports = () => {
   };
 
   const getAllowedRolesForMethod = (endpointPermissions, method) => {
+    console.log(endpointPermissions[method]);
     if (endpointPermissions[method]) return endpointPermissions[method];
     return null;
   };
 
   // return a middleware
   return (req, res, next) => {
+    const whitelistRoutesRegex = new RegExp(/\/(login|register|auth)$/);
+
+    if (whitelistRoutesRegex.test(req.path)) {
+      return next();
+    }
+
     const {user} = req;
     const endpoint = req.path;
     const endpointPermissions = getAllowedRolesForEndpoint(endpoint);
     const allowedRoles = getAllowedRolesForMethod(endpointPermissions, req.method);
 
     try {
-      if (!allowedRoles.includes(user.type)) {
-        return res.forbidden({message: `Access forbidden for role ${user.type}`});
+      if (!allowedRoles.includes(user.role)) {
+        return res.forbidden({message: `Access forbidden for role ${user.role}`});
       }
       next();
     } catch (err) {

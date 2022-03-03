@@ -23,12 +23,14 @@ module.exports = (sequelize, DataTypes) => {
   Lecture.Errors = errors;
 
   Lecture.associate = ({
+    AssignmentsModel,
     LectureMaterialsModel,
     LectureCommentsModel,
     TeachersModel,
     CoursesModel,
     CourseLecturesModel,
   }) => {
+    Lecture.hasMany(AssignmentsModel, {onDelete: 'cascade'});
     Lecture.hasMany(LectureMaterialsModel, {as: 'lecture_material', onDelete: 'cascade'});
     Lecture.hasMany(LectureCommentsModel, {as: 'lecture_comments', onDelete: 'cascade'});
     Lecture.belongsTo(TeachersModel, {as: 'teacher', foreignKey: {allowNull: false}});

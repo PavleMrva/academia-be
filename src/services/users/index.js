@@ -26,28 +26,28 @@ const getAllUsers = (perPage, pageNum) => {
 const authenticate = async (username) => {
   const user = await UsersModel.findOne({
     where: {username},
-    attributes: ['id', 'username', 'email', ['first_name', 'firstName'], ['last_name', 'lastName'], 'password', 'type'],
+    attributes: ['id', 'username', 'email', ['first_name', 'firstName'], ['last_name', 'lastName'], 'password', 'role'],
   });
 
   let userExists;
-  if (user.type === USER_TYPES.STUDENT) {
+  if (user.role === USER_TYPES.STUDENT) {
     userExists = await user.getStudent();
-  } else if (user.type === USER_TYPES.TEACHER) {
+  } else if (user.role === USER_TYPES.TEACHER) {
     userExists = await user.getTeacher();
   } else {
     userExists = await user.getAdmin();
   }
 
   if (!userExists) {
-    throw new UsersModel.Errors.UserTypeWithUsernameNotFound(user.type, username);
+    throw new UsersModel.Errors.UserTypeWithUsernameNotFound(user.role, username);
   }
 };
 
 const register = async (userData) => {
-  const isTypeValid = Object.keys(USER_TYPES).some((t) => USER_TYPES[t] === userData.type);
+  const isTypeValid = Object.keys(USER_TYPES).some((t) => USER_TYPES[t] === userData.role);
 
   if (!isTypeValid) {
-    throw new UsersModel.Errors.UserTypeNotValid(userData.type);
+    throw new UsersModel.Errors.UserTypeNotValid(userData.role);
   }
 
   await sequelize.transaction(async (t) => {
@@ -56,11 +56,11 @@ const register = async (userData) => {
     });
     userData.userId = user.id;
 
-    if (userData.type === USER_TYPES.STUDENT) {
+    if (userData.role === USER_TYPES.STUDENT) {
       await StudentsModel.create(userData, {
         transaction: t,
       });
-    } else if (userData.type === USER_TYPES.TEACHER) {
+    } else if (userData.role === USER_TYPES.TEACHER) {
       await TeachersModel.create(userData, {
         transaction: t,
       });
@@ -71,7 +71,7 @@ const register = async (userData) => {
     }
   });
 
-  if (userData.type === USER_TYPES.STUDENT) {
+  if (userData.role === USER_TYPES.STUDENT) {
     return await UsersModel.findOne({
       where: {username: userData.username},
       include: [{
