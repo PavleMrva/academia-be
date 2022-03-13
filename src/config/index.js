@@ -50,4 +50,10 @@ module.exports = {
     memoryCost: 65536,
     version: 19,
   },
+
+  mysql: {
+    username: process.env.MYSQLDB_USER,
+    password: process.env.MYSQLDB_ROOT_PASSWORD,
+    database: process.env.MYSQLDB_DATABASE,
+  },
 };

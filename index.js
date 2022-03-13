@@ -25,9 +25,10 @@ const setupProcessListeners = () => {
 const setupSequelize = async () => {
   try {
     await sequelize.authenticate();
+    await sequelize.query(`CREATE DATABASE IF NOT EXISTS \`${config.mysql.database}\`;`);
     logger.info('Connection has been established successfully.');
-    // await sequelize.sync({force: true});
-    // logger.info('All models were synchronized successfully.');
+    await sequelize.sync();
+    logger.info('All models were synchronized successfully.');
   } catch (error) {
     logger.error(`Unable to connect to the database: ${error}`);
   }

@@ -1,8 +1,9 @@
+const config = require('../config');
 const {Sequelize, DataTypes} = require('sequelize');
 const logger = require('../libs/logger');
 
-const sequelize = new Sequelize('academia', 'root', 'password', {
-  host: 'localhost',
+const sequelize = new Sequelize(config.mysql.database, config.mysql.username, config.mysql.password, {
+  host: 'mysqldb', // mysql container name
   dialect: 'mysql',
   logging: (msg) => logger.debug(msg),
 });

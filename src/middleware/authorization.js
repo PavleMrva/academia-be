@@ -21,8 +21,7 @@ module.exports = () => {
   };
 
   const getAllowedRolesForMethod = (endpointPermissions, method) => {
-    console.log(endpointPermissions[method]);
-    if (endpointPermissions[method]) return endpointPermissions[method];
+    if (endpointPermissions && endpointPermissions[method]) return endpointPermissions[method];
     return null;
   };
 
@@ -40,6 +39,10 @@ module.exports = () => {
     const allowedRoles = getAllowedRolesForMethod(endpointPermissions, req.method);
 
     try {
+      if (!allowedRoles) {
+        return res.notFound('path_not_found', {message: `Path ${req.path} not found`});
+      }
+
       if (!allowedRoles.includes(user.role)) {
         return res.forbidden({message: `Access forbidden for role ${user.role}`});
       }

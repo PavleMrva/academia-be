@@ -7,6 +7,12 @@ module.exports = async (req, res, next) => {
   const receivedRefreshToken = req.cookies['refresh_token'];
 
   try {
+    const whitelistRoutesRegex = new RegExp(/\/(login|register|auth)$/);
+
+    if (whitelistRoutesRegex.test(req.path)) {
+      return next();
+    }
+
     const {
       accessToken,
       refreshToken,
